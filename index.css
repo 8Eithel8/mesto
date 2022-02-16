@@ -1,7 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
-/* TODO hover js media ссылки исправить теги,  */
+/* TODO hover js media исправить теги,  */
 
 .page {
   font-family: 'Inter', sans-serif;
@@ -11,6 +11,7 @@
   min-width: 320px;
   margin: 0 auto;
   position: relative;
+  /* padding: 0 35px; */
 }
 
 .header {
@@ -20,10 +21,23 @@
   border-bottom: 1px solid #545454;
 }
 
+@media (max-width: 767px) {
+  .header {
+    /* max-width: 282px; */
+    /* margin: 36px 0 0 0; */
+  }
+} 
+
 .header__logo {
   width: 142px;
   height: 33px;
 }
+
+@media (max-width: 767px) {
+  .header__logo {
+    margin-left: 27px;
+  }
+} 
 
 .profile {
   max-width: 880px;
@@ -32,6 +46,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+@media (max-width: 767px) {
+  .profile {
+    flex-direction: column;
+    justify-content: center;
+    padding: 38px 0 36px 0;
+  }
 }
 
 .profile__avatar {
@@ -50,6 +72,13 @@
   column-gap: 19px;
 }
 
+@media (max-width: 767px) {
+  .profile__info {
+    column-gap: 10px;
+    grid-template-rows: 40px 1fr;
+  }
+}  
+
 .profile__title {
   max-width: 294px;
   font-weight: 500;
@@ -62,12 +91,20 @@
   padding: 0;
 }
 
+@media (max-width: 767px) {
+  .profile__title {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}  
+
 .profile__button {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   border: 1px solid #fff;
   background-color: black;
 }
+
 
 .profile__button:hover {
   opacity: .6;
@@ -82,6 +119,13 @@
   background-image: url(./image/plus.svg);
   margin-left: auto;
 }
+
+@media (max-width: 767px) {
+  .profile__button_type_add {
+    width: 282px;
+    margin: 36px 0 0 0;
+  }
+} 
 
 .profile__button_type_edit {
   width: 24px;
@@ -99,8 +143,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  /* align-self: end; */
 }
+
+@media (max-width: 767px) {
+  .profile__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    grid-column: 1/2;
+  }
+}  
 
 .cards {
   display: grid;
@@ -116,9 +168,13 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .cards {
     max-width: 581px;
-    padding: 0 25px;
   }
+}
 
+@media (max-width: 767px) {
+  .cards {
+    max-width: 282px;
+  }
 }
 
 .card {
@@ -184,6 +240,12 @@
   margin: 0 auto;
   padding: 50px 0 60px 0;
 }
+
+@media (max-width: 767px) {
+  .footer {
+    padding: 48px 19px 36px 19px;
+  }
+} 
 
 .footer__copyright {
   font-size: 18px;
