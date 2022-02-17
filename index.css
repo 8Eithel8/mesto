@@ -1,7 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
-/* TODO js исправить теги (подумать про figure), .popup проверить высоту слоя, исправить у section  класс  */
+/* TODO js .popup проверить высоту слоя, у футера лишний марджин  */
 
 .page {
   font-family: 'Inter', sans-serif;
@@ -259,7 +259,7 @@
 .footer {
   max-width: 880px;
   margin: 0 auto;
-  padding: 67px 0 60px 0;
+  padding: 67px 0 56px 0;
 }
 
 @media (max-width: 1023px) {
@@ -290,6 +290,7 @@
 }    
 
 .popup {
+  /* display: flex; */
   display: none;
   position: fixed;
   width: 100%;
