@@ -181,7 +181,6 @@
   max-width: 880px;
   margin: 0 auto;
   padding: 0;
-  list-style: none;
   column-gap: 17px;
   row-gap: 20px;
 }
@@ -201,6 +200,7 @@
 .card {
   font-size: 0;
   max-width: 282px;
+  margin: 0;
 }
 
 .card__image {
@@ -208,7 +208,6 @@
   border-top-right-radius: 10px;
   margin: 0;
   padding: 0;
-  font-size: 0;
 }
 
 .card__footer {
@@ -217,7 +216,7 @@
   background-color: white;
   color: black;
   margin: 0;
-  padding: 30px 20px 26px 21px;
+  padding: 25px 20px 25px 21px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   justify-content: space-between;
@@ -230,7 +229,7 @@
   margin: 0;
   font-weight: 900;
   font-size: 24px;
-  line-height: 23px;
+  line-height: 29px;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -242,6 +241,7 @@
   height: 19px;
   background-image: url('./image/like.svg');
   background-repeat: no-repeat;
+  align-self: center;
 }
 
 .card__like:hover {
@@ -271,7 +271,7 @@
 
 @media (max-width: 767px) {
   .footer {
-    padding: 50px 19px 36px 19px;
+    padding: 50px 19px 35px 19px;
   }
 } 
 
