@@ -124,9 +124,10 @@
   border-width: 2px;
   box-sizing: border-box;
   border-radius: 2px;
-  background-image: url(./image/plus.svg);
+  background-image: url('./images/plus.svg');
   margin-left: auto;
   padding: 0;
+  flex-shrink: 0;
 }
 
 @media (max-width: 767px) {
@@ -140,7 +141,7 @@
 .profile__button_type_edit {
   width: 24px;
   height: 24px;
-  background-image: url('./image/pen.svg');
+  background-image: url('./images/pen.svg');
   justify-self: start;
   margin-top: 10px;
   padding: 0;
@@ -170,7 +171,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    grid-column: 1/2;
+    /* grid-column: 1/2; */
   }
 }  
 
@@ -238,7 +239,7 @@
 .card__like {
   width: 22px;
   height: 19px;
-  background-image: url('./image/like.svg');
+  background-image: url('./images/like.svg');
   background-repeat: no-repeat;
   align-self: center;
 }
@@ -251,7 +252,7 @@
 .card__like:active {
   width: 22px;
   height: 19px;
-  background-image: url('./image/like-active.svg');
+  background-image: url('./images/like-active.svg');
   background-repeat: no-repeat;
   opacity: 1;
 }
