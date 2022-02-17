@@ -1,26 +1,31 @@
 let buttonEdit = document.querySelector('.profile__button_type_edit');
 let popup = document.querySelector('.popup');
-// let buttonClose = document.querySelector('');
+let buttonClose = document.querySelector('.popup__button_type_close');
+
+let fieldName = document.querySelector('#name');
+let fieldInfo = document.querySelector('#info');
+let profileTitle = document.querySelector('.profile__title');
+let profileSubtitle = document.querySelector('.profile__subtitle');
+let buttonSubmit = document.querySelector('.popup__button_type_submit');
 
 buttonEdit.addEventListener('click', function() {
+  popup.classList.add('popup__opened');
+  fieldName.value = profileTitle.textContent;
+  fieldInfo.value = profileSubtitle.textContent;
+});
 
-  // if (popup.classList.contains('popup__opened')) {
-  //   popup.classList.remove('popup__opened');
-  //   } else {
-      popup.classList.add('popup__opened');
-  });
-// });
+buttonClose.addEventListener('click', function() {
+  popup.classList.remove('popup__opened');
+  fieldName.value = '';
+  fieldInfo.value = '';
+});
+
+buttonSubmit.addEventListener('click', function() {
+   profileTitle.textContent = fieldName.value;
+   profileSubtitle.textContent = fieldInfo.value;
+   popup.classList.remove('popup__opened');
+});
 
 
-// let buttonEdit = document.querySelector('.popup__button');
-// let popup = document.querySelector('.popup');
 
-
-// buttonEdit.addEventListener('click', function() {
-
-//   if (popup.classList.contains('popup__opened')) {
-//     popup.classList.remove('popup__opened');
-//     } else {
-//       popup.classList.add('popup__opened');
-//   };
-// });
+ 

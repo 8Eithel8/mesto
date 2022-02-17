@@ -117,6 +117,7 @@
 
 .profile__button:hover {
   opacity: .6;
+  cursor: pointer;
 }  
 
 .profile__button_type_add {
@@ -246,6 +247,7 @@
 
 .card__like:hover {
   opacity: .5;
+  cursor: pointer;
 }
 
 .card__like:active {
@@ -351,6 +353,7 @@
 
 .popup__button_type_close:hover {
   opacity: .6;
+  cursor: pointer;
 }  
 
 .popup__title {
@@ -421,6 +424,7 @@
 
 .popup__button_type_submit:hover {
   opacity: .8;
+  cursor: pointer;
 }
 
 .popup__opened {
