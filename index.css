@@ -1,8 +1,6 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
-/* TODO js .popup проверить высоту слоя, у футера лишний марджин  */
-
 .page {
   font-family: 'Inter', sans-serif;
   background-color: black;
@@ -292,7 +290,6 @@
 }    
 
 .popup {
-  /* display: flex; */
   display: none;
   position: fixed;
   width: 100%;

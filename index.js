@@ -21,9 +21,9 @@ buttonClose.addEventListener('click', function() {
 });
 
 buttonSubmit.addEventListener('click', function() {
-   profileTitle.textContent = fieldName.value;
-   profileSubtitle.textContent = fieldInfo.value;
-   popup.classList.remove('popup__opened');
+  profileTitle.textContent = fieldName.value;
+  profileSubtitle.textContent = fieldInfo.value;
+  popup.classList.remove('popup__opened');
 });
 
 
