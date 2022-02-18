@@ -10,24 +10,29 @@ let buttonSubmit = document.querySelector('.popup__button_type_submit');
 let form = document.querySelector('.popup__form');
 console.log(form);
 
-buttonEdit.addEventListener('click', function() {
+
+function editor() {
   popup.classList.add('popup__opened');
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
-});
+};
 
-buttonClose.addEventListener('click', function() {
+buttonEdit.addEventListener('click', editor);
+
+function closer () {
   popup.classList.remove('popup__opened');
-  fieldName.value = '';
-  fieldInfo.value = '';
-});
+};
 
-form.addEventListener('submit', function(evt) {
+buttonClose.addEventListener('click', closer);
+
+function saver (evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
   profileSubtitle.textContent = fieldInfo.value;
   popup.classList.remove('popup__opened');
-});
+};
+
+form.addEventListener('submit', saver);
 
 
 
