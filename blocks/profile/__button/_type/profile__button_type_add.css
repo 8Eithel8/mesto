@@ -4,7 +4,7 @@
   border-width: 2px;
   box-sizing: border-box;
   border-radius: 2px;
-  background-image: url('./images/plus.svg');
+  background-image: url('../../../../images/plus.svg');
   margin-left: auto;
   padding: 0;
   flex-shrink: 0;
