@@ -8,8 +8,6 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let buttonSubmit = document.querySelector('.popup__button_type_submit');
 let form = document.querySelector('.popup__form');
-console.log(form);
-
 
 function editor() {
   popup.classList.add('popup__opened');
