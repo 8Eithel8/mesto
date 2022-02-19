@@ -4,6 +4,8 @@
   background-image: url('../../../images/like.svg');
   background-repeat: no-repeat;
   align-self: center;
+  border: none;
+  background-color: transparent;
 }
 
 .card__like:hover {
