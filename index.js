@@ -27,3 +27,30 @@ function saver(evt) {
 buttonEdit.addEventListener('click', editor);
 buttonClose.addEventListener('click', closer);
 form.addEventListener('submit', saver);
+
+const initialCards = [
+  {
+   name: 'Петропавловская крепость',
+   link: './images/Piter.jpg'
+ },
+ {
+   name: 'ВДНХ',
+   link: './images/vdkh.jpg'
+ },
+ {
+   name: 'Царское село',
+   link: './images/Pushkin.jpg'
+ },
+ {
+   name: 'Тверская область. Река Сестра',
+   link: './images/Tver_obl.jpg'
+ },
+ {
+   name: 'Крым. Воронцовский дворец',
+   link: './images/Livadia_krim.jpg'
+ },
+ {
+   name: 'Московская область. Восток',
+   link: './images/Mos_obl.jpg'
+ },
+];
