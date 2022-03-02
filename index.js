@@ -37,7 +37,12 @@ let fieldInfo = document.querySelector('#info');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let form = document.querySelector('.popup__form');
-
+let cardDelete = document.querySelector('.card__delete');
+let cardsDelete = document.querySelectorAll('.card__delete');
+let cardLike = document.querySelector('.card__like');
+console.log(cardLike);
+let cardsLike = document.querySelectorAll('.card__like');
+let cardAdded = document.querySelector('.added');
 
 function profileEditHandler() {
   popup.classList.add('popup_opened');
@@ -63,6 +68,11 @@ function profileSaveHandler(evt) {
   formCloseHandler();
 };
 
+
+function cardLikeHandler () {
+  cardLike.classList.toggle('added');
+}
+
 for (let i=0; i < buttonsClose.length; i++) {
   buttonsClose[i].addEventListener('click', formCloseHandler);
 };
@@ -70,5 +80,6 @@ for (let i=0; i < buttonsClose.length; i++) {
 buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
+cardLike.addEventListener('click', cardLikeHandler);
 
 

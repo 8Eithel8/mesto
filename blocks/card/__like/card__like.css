@@ -21,3 +21,12 @@
   background-repeat: no-repeat;
   opacity: 1;
 }
+
+/*переимновать*/
+.added {
+  width: 22px;
+  height: 19px;
+  background-image: url('../../../images/like-active.svg');
+  background-repeat: no-repeat;
+  opacity: 1;
+}
