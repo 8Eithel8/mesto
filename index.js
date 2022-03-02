@@ -32,7 +32,6 @@ let buttonAdd = document.querySelector('.profile__button_type_add');
 let popupAdd = document.querySelector('.popup_type_adder');
 let buttonClose = document.querySelector('.popup__button_type_close');
 let buttonsClose = document.querySelectorAll('.popup__button_type_close');
-console.log(buttonsClose);
 let fieldName = document.querySelector('#name');
 let fieldInfo = document.querySelector('#info');
 let profileTitle = document.querySelector('.profile__title');
