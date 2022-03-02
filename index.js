@@ -27,14 +27,18 @@ const initialCards = [
 
 let buttonEdit = document.querySelector('.profile__button_type_edit');
 let popup = document.querySelector('.popup');
+let popups = document.querySelectorAll('.popup');
+let buttonAdd = document.querySelector('.profile__button_type_add');
+let popupAdd = document.querySelector('.popup_type_adder');
 let buttonClose = document.querySelector('.popup__button_type_close');
+let buttonsClose = document.querySelectorAll('.popup__button_type_close');
+console.log(buttonsClose);
 let fieldName = document.querySelector('#name');
 let fieldInfo = document.querySelector('#info');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let form = document.querySelector('.popup__form');
-let buttonAdd = document.querySelector('.profile__button_type_add');
-let popupAdd = document.querySelector('.popup_type_adder');
+
 
 function profileEditHandler() {
   popup.classList.add('popup_opened');
@@ -42,8 +46,15 @@ function profileEditHandler() {
   fieldInfo.value = profileSubtitle.textContent;
 };
 
+function formAddHandler(evt) {
+  popupAdd.classList.add('popup_opened');
+};
+
+
 function formCloseHandler() {
-  popup.classList.remove('popup_opened');
+  for (let i = 0; i < popups.length; i++) {
+    popups[i].classList.remove('popup_opened')
+  };
 };
 
 function profileSaveHandler(evt) {
@@ -53,13 +64,12 @@ function profileSaveHandler(evt) {
   formCloseHandler();
 };
 
-function formAddHandler(evt) {
-  popupAdd.classList.add('popup_opened');
+for (let i=0; i < buttonsClose.length; i++) {
+  buttonsClose[i].addEventListener('click', formCloseHandler);
 };
 
-
 buttonEdit.addEventListener('click', profileEditHandler);
-buttonClose.addEventListener('click', formCloseHandler);
+buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
-buttonAdd.addEventListener('click', formAddHandler)
+
 
