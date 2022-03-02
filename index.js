@@ -34,34 +34,32 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let form = document.querySelector('.popup__form');
 let buttonAdd = document.querySelector('.profile__button_type_add');
-let popup = document.querySelector('.popup_type_adder');
+let popupAdd = document.querySelector('.popup_type_adder');
 
-function editor() {
+function profileEditHandler() {
   popup.classList.add('popup_opened');
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
 };
 
-function closer() {
+function formCloseHandler() {
   popup.classList.remove('popup_opened');
 };
 
-function saver(evt) {
+function profileSaveHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
   profileSubtitle.textContent = fieldInfo.value;
-  closer();
+  formCloseHandler();
 };
 
-function adder(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = fieldName.value;
-  profileSubtitle.textContent = fieldInfo.value;
-  closer();
+function formAddHandler(evt) {
+  popupAdd.classList.add('popup_opened');
 };
 
 
-buttonEdit.addEventListener('click', editor);
-buttonClose.addEventListener('click', closer);
-form.addEventListener('submit', saver);
+buttonEdit.addEventListener('click', profileEditHandler);
+buttonClose.addEventListener('click', formCloseHandler);
+form.addEventListener('submit', profileSaveHandler);
+buttonAdd.addEventListener('click', formAddHandler)
 
