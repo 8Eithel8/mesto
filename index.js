@@ -77,6 +77,10 @@ function cardLikeHandler () {
   cardLike.classList.toggle('added');
 }
 
+function photoOpenHandler(evt) {
+  popupPhoto.classList.add('popup_opened');
+};
+
 for (let i=0; i < buttonsClose.length; i++) {
   buttonsClose[i].addEventListener('click', formCloseHandler);
 };
@@ -85,5 +89,5 @@ buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 cardLike.addEventListener('click', cardLikeHandler);
-cardImage.addEventListener('click', formAddHandler);
+cardImage.addEventListener('click', photoOpenHandler);
 

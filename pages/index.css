@@ -35,3 +35,8 @@
   display: flex;
 }
 
+.popup__photo {
+  max-width: 75vw;
+  height: 75vh;
+  object-fit: cover;
+}
