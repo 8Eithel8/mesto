@@ -43,6 +43,10 @@ let cardLike = document.querySelector('.card__like');
 console.log(cardLike);
 let cardsLike = document.querySelectorAll('.card__like');
 let cardAdded = document.querySelector('.added');
+// let cardAdded = document.querySelector('.added');//
+let popupPhoto = document.querySelector('.popup_type_photo');
+let cardImage = document.querySelector('.card__image');
+
 
 function profileEditHandler() {
   popup.classList.add('popup_opened');
@@ -81,5 +85,5 @@ buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 cardLike.addEventListener('click', cardLikeHandler);
-
+cardImage.addEventListener('click', formAddHandler);
 
