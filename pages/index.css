@@ -36,7 +36,12 @@
 }
 
 .popup__photo {
-  max-width: 75vw;
-  height: 75vh;
+  width: 75vw;
+  max-height: 75vh;
   object-fit: cover;
+}
+
+.popup__photo-card {
+  max-width: 75vw;
+  position: relative;
 }
