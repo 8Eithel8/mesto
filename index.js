@@ -37,8 +37,8 @@ let fieldInfo = document.querySelector('#info');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let form = document.querySelector('.popup__form');
-let cardDelete = document.querySelector('.card__delete');
-let cardsDelete = document.querySelectorAll('.card__delete');
+let cardRemove = document.querySelector('.card__remove');
+let cardsRemove = document.querySelectorAll('.card__remove');
 let cardLike = document.querySelector('.card__like');
 console.log(cardLike);
 let cardsLike = document.querySelectorAll('.card__like');
@@ -46,6 +46,7 @@ let cardAdded = document.querySelector('.added');
 // let cardAdded = document.querySelector('.added');//
 let popupPhoto = document.querySelector('.popup_type_photo');
 let cardImage = document.querySelector('.card__image');
+
 
 
 function profileEditHandler() {
@@ -73,7 +74,7 @@ function profileSaveHandler(evt) {
 };
 
 
-function cardLikeHandler () {
+function cardLikeHandler() {
   cardLike.classList.toggle('added');
 }
 
@@ -85,9 +86,14 @@ for (let i=0; i < buttonsClose.length; i++) {
   buttonsClose[i].addEventListener('click', formCloseHandler);
 };
 
+function removeCardHandler() {
+  cardRemove.parentNode.remove(cardRemove);
+}
+
 buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 cardLike.addEventListener('click', cardLikeHandler);
 cardImage.addEventListener('click', photoOpenHandler);
+cardRemove.addEventListener('click', removeCardHandler);
 
