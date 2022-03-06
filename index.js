@@ -75,25 +75,38 @@ function profileSaveHandler(evt) {
 
 
 function cardLikeHandler() {
-  cardLike.classList.toggle('added');
-}
+  for (let i = 0; i < cardsLike.length; i++) {
+    // if // 
+    cardsLike[i].classList.toggle('added');
+  };
+};
 
 function photoOpenHandler(evt) {
   popupPhoto.classList.add('popup_opened');
-};
-
-for (let i=0; i < buttonsClose.length; i++) {
-  buttonsClose[i].addEventListener('click', formCloseHandler);
 };
 
 function removeCardHandler() {
   cardRemove.parentNode.remove(cardRemove);
 }
 
+for (let i=0; i < buttonsClose.length; i++) {
+  buttonsClose[i].addEventListener('click', formCloseHandler);
+};
+
+for (let i=0; i < cardsLike.length; i++) {
+  cardsLike[i].addEventListener('click', cardLikeHandler);
+};
+
+
 buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
-cardLike.addEventListener('click', cardLikeHandler);
 cardImage.addEventListener('click', photoOpenHandler);
 cardRemove.addEventListener('click', removeCardHandler);
 
+
+// for (var i = 0; i < thumbnails.length; i++) {
+//   thumbnails[i].addEventListener('click', function () {
+//     fullPhoto.src = photos[i];
+//   });
+// }
