@@ -27,56 +27,8 @@
       </section>
 
       <section class="cards">
-        <template id="card-template">
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Kosinskie_polya.jpg" alt="Золотые поля и осенние леса средней шитроты">
-          <div class="card__footer">
-            <h2 class="card__title">Косинские поля</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
-        </template>
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Losinka.jpg" alt="Лес Национального парка Лосиный остров осенью">
-          <div class="card__footer">
-            <h2 class="card__title">Лосиный остров</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Mos_obl.jpg" alt="Осенний крутой склон к водоему">
-          <div class="card__footer">
-            <h2 class="card__title">Московская область. Восток</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Tver_obl.jpg" alt="Рыбак, плывующий по туманной реке">
-          <div class="card__footer">
-            <h2 class="card__title">Тверская область. Река Сестра</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Svyatoe_ozero.jpg" alt="Озеро на закате, окутанное туманом">
-          <div class="card__footer">
-            <h2 class="card__title">Святое озеро</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <button class="card__remove" type="button" aria-label="Удалить"></button>
-          <img class="card__image" src="./images/Chernoe_ozero.jpg" alt="Озерный  берег в цветах на закате">
-          <div class="card__footer">
-            <h2 class="card__title">Черное озеро</h2>
-            <button class="card__like" type="button" aria-label="Нравится"></button>
-          </div>
-        </article>
+
+    
       </section>
 
       <div class="popup">
@@ -99,10 +51,10 @@
           <h2 class="popup__title">Новое место</h2>
           <form class="popup__form" id="new-card-form" name="form-profile">
             <div class="popup__fields">
-              <input class="popup__field" type="text" name="photo-name" id="photo-name" value="" placeholder="Название" required>
-              <input class="popup__field" type="text" name="photo-link" id="photo-link" value="" placeholder="Ссылка на картинку" required>
+              <input class="popup__field" type="text" name="photo-name" id="photo-name" placeholder="Название" required>
+              <input class="popup__field" type="text" name="photo-link" id="photo-link" placeholder="Ссылка на картинку" required>
             </div>
-            <button class="popup__button popup__button_type_submit" id="button-save">Сохранить</button>            
+            <button class="popup__button popup__button_type_submit" type="button" id="button-save">Сохранить</button>            
           </form>  
         </div>  
       </div>
@@ -117,6 +69,17 @@
       
 
     </main>
+
+    <template id="card-template">
+      <article class="card">
+        <button class="card__remove" type="button" aria-label="Удалить"></button>
+        <img class="card__image" src="" alt="">
+        <div class="card__footer">
+          <h2 class="card__title"></h2>
+          <button class="card__like" type="button" aria-label="Нравится"></button>
+        </div>
+      </article>
+    </template>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Анастасия Улитина</p>
