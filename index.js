@@ -84,12 +84,6 @@ function formCloseHandler() {
   };
 };
 
-function formCloseHandler() {
-  for (let i = 0; i < popups.length; i++) {
-    popups[i].classList.remove('popup_opened')
-  };
-};
-
 function profileSaveHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
