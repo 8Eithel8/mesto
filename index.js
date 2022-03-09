@@ -37,16 +37,11 @@ const fieldInfo = document.querySelector('#info');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const form = document.querySelector('.popup__form');
-// const cardRemove = document.querySelector('.card__remove');
-// const cardsRemove = document.querySelectorAll('.card__remove');
+const newCardForm = document.querySelector('#new-card-form');
 const cards = document.querySelector('.cards');
 const cardAdded = document.querySelector('.added');  /*он нужен для работы лаков. но что-то не понятно*/
 const popupPhoto = document.querySelector('.popup_type_photo');
-// const cardImage = document.querySelector('.card__image');
-// const newCardForm = document.querySelector('#new-card-form');
 const cardTemplate = document.querySelector('#card-template').content;
-const title = cardTemplate.querySelector('.card__title');
-const image = cardTemplate.querySelector('.card__image');
 const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
 
@@ -58,7 +53,7 @@ function addCard(linkValue, titleValue) {
   cardItem.querySelector('.card__like').addEventListener('click', cardLikeHandler);
   cardItem.querySelector('.card__remove').addEventListener('click', removeCardHandler);
   cardItem.querySelector('.card__image').addEventListener('click', photoOpenHandler);
-  cards.append(cardItem);
+  cards.prepend(cardItem);
 };
 
 for (let i = 0; i < initialCards.length; i++) {
@@ -116,13 +111,12 @@ buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 
-const saveButton = document.querySelector('#button-save');
+// const saveButton = document.querySelector('#button-save');
 
-saveButton.addEventListener('click', function () {
-  
+newCardForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
   let image = inputPhotoLink;
   let title = inputPhotoName; 
-  console.log(inputPhotoName);
   addCard(image.value, title.value);
   title.value = '';
   image.value = '';
