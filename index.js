@@ -25,27 +25,33 @@ const initialCards = [
  },
 ];
 
-let buttonEdit = document.querySelector('.profile__button_type_edit');
-let popup = document.querySelector('.popup');
-let popups = document.querySelectorAll('.popup');
-let buttonAdd = document.querySelector('.profile__button_type_add');
-let popupAdd = document.querySelector('.popup_type_adder');
-let buttonClose = document.querySelector('.popup__button_type_close');
-let buttonsClose = document.querySelectorAll('.popup__button_type_close');
-let fieldName = document.querySelector('#name');
-let fieldInfo = document.querySelector('#info');
-let profileTitle = document.querySelector('.profile__title');
-let profileSubtitle = document.querySelector('.profile__subtitle');
-let form = document.querySelector('.popup__form');
-let cardRemove = document.querySelector('.card__remove');
-let cardsRemove = document.querySelectorAll('.card__remove');
-let cardLike = document.querySelector('.card__like');
-let cardsLike = document.querySelectorAll('.card__like');
-let cardAdded = document.querySelector('.added');
-// let cardAdded = document.querySelector('.added');//
-let popupPhoto = document.querySelector('.popup_type_photo');
-let cardImage = document.querySelector('.card__image');
-
+const buttonEdit = document.querySelector('.profile__button_type_edit');
+const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
+const buttonAdd = document.querySelector('.profile__button_type_add');
+const popupAdd = document.querySelector('.popup_type_adder');
+const buttonClose = document.querySelector('.popup__button_type_close');
+const buttonsClose = document.querySelectorAll('.popup__button_type_close');
+const fieldName = document.querySelector('#name');
+const fieldInfo = document.querySelector('#info');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+const form = document.querySelector('.popup__form');
+const cardRemove = document.querySelector('.card__remove');
+const cardsRemove = document.querySelectorAll('.card__remove');
+const cardLike = document.querySelector('.card__like');
+const cards = document.querySelector('.cards');
+const cardsLike = document.querySelectorAll('.card__like');
+// const newCardAdd = document.querySelector('.popup_type_add');
+const cardAdded = document.querySelector('.added');  /*он нужен для работы лаков. но что-то не понятно*/
+const popupPhoto = document.querySelector('.popup_type_photo');
+const cardImage = document.querySelector('.card__image');
+const newCardForm = document.querySelector('#new-card-form');
+const cardTemplate = document.querySelector('#card-template').content;
+const title = cardTemplate.querySelector('.card__title');
+const image = cardTemplate.querySelector('.card__image');
+// const title = document.querySelector('#photo-name');
+// const image = document.querySelector('#photo-link');
 
 
 function profileEditHandler() {
@@ -54,7 +60,7 @@ function profileEditHandler() {
   fieldInfo.value = profileSubtitle.textContent;
 };
 
-function formAddHandler(evt) {
+function formAddHandler() {
   popupAdd.classList.add('popup_opened');
 };
 
@@ -73,13 +79,20 @@ function profileSaveHandler(evt) {
 };
 
 
-function cardLikeHandler() {
-  this.classList.toggle('added');
+function cardLikeHandler(evt) {
+  evt.target.classList.toggle('added');
 };
 
-function photoOpenHandler(evt) {
+function photoOpenHandler() {
   popupPhoto.classList.add('popup_opened');
+  document.querySelector('.popup__photo').src = image.src;
+  document.querySelector('.popup__photo-title').textContent = title.textContent;
 };
+
+/*deleteButton.addEventListener('click', function () {
+  const listItem = deleteButton.closest('.todo__item');
+  listItem.remove();
+});  такой вариант предлагают в яндексе*/
 
 function removeCardHandler() {
   this.parentNode.remove(cardRemove);
@@ -109,3 +122,23 @@ cardRemove.addEventListener('click', removeCardHandler);
 //     fullPhoto.src = photos[i];
 //   });
 // }
+
+function addCard(linkValue, titleValue) {
+  // const cardTemplate = document.querySelector('#card-template').content;
+  // эта перенеса на верх в глобалку, т.к. нужна еще в одном месте
+  const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
+  
+  cardItem.querySelector('#photo-name').textContent = titleValue;
+  cardItem.querySelector('#photo-link').src = linkValue;
+
+  cards.preppend(cardItem);
+}
+
+const saveButton = document.querySelector('#button-save');
+
+saveButton.addEventListener('click', function () {
+  
+
+  addCard(image.value, title.value);
+  console.log('муть');
+}); 
