@@ -38,10 +38,8 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const form = document.querySelector('.popup__form');
 const cardRemove = document.querySelector('.card__remove');
-const cardsRemove = document.querySelectorAll('.card__remove');
 const cardLike = document.querySelector('.card__like');
 const cards = document.querySelector('.cards');
-const cardsLike = document.querySelectorAll('.card__like');
 // const newCardAdd = document.querySelector('.popup_type_add');
 const cardAdded = document.querySelector('.added');  /*он нужен для работы лаков. но что-то не понятно*/
 const popupPhoto = document.querySelector('.popup_type_photo');
@@ -50,8 +48,8 @@ const newCardForm = document.querySelector('#new-card-form');
 const cardTemplate = document.querySelector('#card-template').content;
 const title = cardTemplate.querySelector('.card__title');
 const image = cardTemplate.querySelector('.card__image');
-// const title = document.querySelector('#photo-name');
-// const image = document.querySelector('#photo-link');
+const inputPhotoName = document.querySelector('#photo-name');
+const inputPhotoLink = document.querySelector('#photo-link');
 
 
 function profileEditHandler() {
@@ -70,6 +68,11 @@ function formCloseHandler() {
     popups[i].classList.remove('popup_opened')
   };
 };
+
+function formCloseHandler(evt) {
+  evt.target.popup.classList.remove('popup_opened');
+};
+
 
 function profileSaveHandler(evt) {
   evt.preventDefault();
@@ -94,20 +97,12 @@ function photoOpenHandler() {
   listItem.remove();
 });  такой вариант предлагают в яндексе*/
 
-function removeCardHandler() {
-  this.parentNode.remove(cardRemove);
+function removeCardHandler(evt) {
+  evt.target.parentNode.remove(cardRemove);
 }
 
 for (let i=0; i < buttonsClose.length; i++) {
   buttonsClose[i].addEventListener('click', formCloseHandler);
-};
-
-for (let i=0; i < cardsLike.length; i++) {
-  cardsLike[i].addEventListener('click', cardLikeHandler);
-};
-
-for (let i=0; i < cardsRemove.length; i++) {
-  cardsRemove[i].addEventListener('click', removeCardHandler);
 };
 
 buttonEdit.addEventListener('click', profileEditHandler);
@@ -115,7 +110,7 @@ buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 cardImage.addEventListener('click', photoOpenHandler);
 cardRemove.addEventListener('click', removeCardHandler);
-
+cardLike.addEventListener('click', cardLikeHandler);
 
 // for (var i = 0; i < thumbnails.length; i++) {
 //   thumbnails[i].addEventListener('click', function () {
@@ -128,8 +123,8 @@ function addCard(linkValue, titleValue) {
   // эта перенеса на верх в глобалку, т.к. нужна еще в одном месте
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
   
-  cardItem.querySelector('#photo-name').textContent = titleValue;
-  cardItem.querySelector('#photo-link').src = linkValue;
+  cardItem.querySelector('.card__title').textContent = titleValue;
+  cardItem.querySelector('.card__image').src = linkValue;
 
   cards.preppend(cardItem);
 }
@@ -137,8 +132,9 @@ function addCard(linkValue, titleValue) {
 const saveButton = document.querySelector('#button-save');
 
 saveButton.addEventListener('click', function () {
-  
-
+    const title = inputPhotoName.value; 
+    const image = inputPhotoLink.value;
+ 
   addCard(image.value, title.value);
   console.log('муть');
 }); 
