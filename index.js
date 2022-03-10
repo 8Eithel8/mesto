@@ -22,7 +22,7 @@ const initialCards = [
  {
    name: 'Черное озеро',
    link: './images/Chernoe_ozero.jpg'
- },
+ }
 ];
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
@@ -37,7 +37,7 @@ const fieldInfo = document.querySelector('#info');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const form = document.querySelector('.popup__form');
-const newCardForm = document.querySelector('#new-card-form');
+const сardFormNew = document.querySelector('#new-card-form');
 const cards = document.querySelector('.cards');
 const cardAdded = document.querySelector('.added');  /*он нужен для работы лаков. но что-то не понятно*/
 const popupPhoto = document.querySelector('.popup_type_photo');
@@ -47,9 +47,9 @@ const inputPhotoLink = document.querySelector('#photo-link');
 
 function addCard(linkValue, titleValue) {
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
-
   cardItem.querySelector('.card__image').src = linkValue;
   cardItem.querySelector('.card__title').textContent = titleValue;
+  cardItem.querySelector('.card__image').alt = titleValue;
   cardItem.querySelector('.card__like').addEventListener('click', cardLikeHandler);
   cardItem.querySelector('.card__remove').addEventListener('click', removeCardHandler);
   cardItem.querySelector('.card__image').addEventListener('click', photoOpenHandler);
@@ -105,9 +105,7 @@ buttonEdit.addEventListener('click', profileEditHandler);
 buttonAdd.addEventListener('click', formAddHandler);
 form.addEventListener('submit', profileSaveHandler);
 
-// const saveButton = document.querySelector('#button-save');
-
-newCardForm.addEventListener('submit', function (evt) {
+сardFormNew.addEventListener('submit', function (evt) {
   evt.preventDefault();
   let image = inputPhotoLink;
   let title = inputPhotoName; 
