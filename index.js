@@ -27,10 +27,8 @@ const initialCards = [
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popup = document.querySelector('.popup');
-const popups = document.querySelectorAll('.popup');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const popupAdd = document.querySelector('.popup_type_adder');
-const buttonClose = document.querySelector('.popup__button_type_close');
 const buttonsClose = document.querySelectorAll('.popup__button_type_close');
 const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
@@ -39,7 +37,6 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const form = document.querySelector('.popup__form');
 const сardFormNew = document.querySelector('#new-card-form');
 const cards = document.querySelector('.cards');
-const cardAdded = document.querySelector('.added');  /*он нужен для работы лаков. но что-то не понятно*/
 const popupPhoto = document.querySelector('.popup_type_photo');
 const cardTemplate = document.querySelector('#card-template').content;
 const inputPhotoName = document.querySelector('#photo-name');
@@ -50,17 +47,17 @@ function addCard(linkValue, titleValue) {
   cardItem.querySelector('.card__image').src = linkValue;
   cardItem.querySelector('.card__title').textContent = titleValue;
   cardItem.querySelector('.card__image').alt = titleValue;
-  cardItem.querySelector('.card__like').addEventListener('click', likeCardHandler);
-  cardItem.querySelector('.card__remove').addEventListener('click', removeCardHandler);
-  cardItem.querySelector('.card__image').addEventListener('click', openPhotoHandler);
+  cardItem.querySelector('.card__like').addEventListener('click', likeCard);
+  cardItem.querySelector('.card__remove').addEventListener('click', removeCard);
+  cardItem.querySelector('.card__image').addEventListener('click', openPhoto);
   cards.prepend(cardItem);
 };
 
-function likeCardHandler(evt) {
+function likeCard(evt) {
   evt.target.classList.toggle('added');
 };
 
-function removeCardHandler(evt) {
+function removeCard(evt) {
   evt.target.parentNode.remove();
 };
 
@@ -68,7 +65,7 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 };
 
-function editProfileHandler() {
+function editProfile() {
   openPopup(popup);
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
@@ -78,10 +75,8 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
-function closeFormHandler() {
-  for (let i = 0; i < popups.length; i++) {
-    closePopup(popups[i]);
-  };
+function closeForm(evt) {
+  closePopup(evt.target.closest('.popup'));
 };
 
 function saveProfile(evt) {
@@ -91,17 +86,16 @@ function saveProfile(evt) {
   closePopup(popup);
 };
 
-function openPhotoHandler(evt) {
+function openPhoto(evt) {
   openPopup(popupPhoto);
   document.querySelector('.popup__photo').src = evt.target.src;
   document.querySelector('.popup__photo-title').textContent = evt.target.parentNode.querySelector('.card__title').textContent;
 };
 
-for (let i=0; i < buttonsClose.length; i++) {
-  buttonsClose[i].addEventListener('click', closeFormHandler);
-};
+buttonsClose.forEach( button => button.addEventListener('click', closeForm));
 
-buttonEdit.addEventListener('click', editProfileHandler);
+
+buttonEdit.addEventListener('click', editProfile);
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 form.addEventListener('submit', saveProfile);
 
