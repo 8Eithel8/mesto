@@ -44,7 +44,7 @@ const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
 const imageFullTitle = document.querySelector('.popup__photo-title')
 
-function addCard(linkValue, titleValue) {
+function createCard(linkValue, titleValue) {
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
   cardItem.querySelector('.card__image').src = linkValue;
   cardItem.querySelector('.card__title').textContent = titleValue;
@@ -52,7 +52,11 @@ function addCard(linkValue, titleValue) {
   cardItem.querySelector('.card__like').addEventListener('click', likeCard);
   cardItem.querySelector('.card__remove').addEventListener('click', removeCard);
   cardItem.querySelector('.card__image').addEventListener('click', openPhoto);
-  cards.prepend(cardItem);
+  return cardItem;
+};
+
+function addCard(container, linkValue, titleValue) {
+  container.prepend(createCard(linkValue, titleValue));
 };
 
 function likeCard(evt) {
@@ -60,7 +64,7 @@ function likeCard(evt) {
 };
 
 function removeCard(evt) {
-  evt.target.parentNode.remove();
+  evt.target.closest('.card').remove();
 };
 
 function openPopup(popup) {
@@ -89,7 +93,7 @@ function saveProfile(evt) {
 };
 
 function openPhoto(evt) {
-  const title = evt.target.parentNode.querySelector('.card__title').textContent;
+  const title = evt.target.alt;
   imageFull.src = evt.target.src;
   imageFullTitle.textContent = title;
   imageFull.alt = title;
@@ -100,7 +104,7 @@ function submitCard(evt) {
   evt.preventDefault();
   let image = inputPhotoLink;
   let title = inputPhotoName; 
-  addCard(image.value, title.value);
+  addCard(cards, image.value, title.value);
   title.value = '';
   image.value = '';
   closePopup(popupAdd);
@@ -113,4 +117,4 @@ buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 form.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard); 
 
-initialCards.forEach(item => addCard(item.link, item.name));
+initialCards.forEach(item => addCard(cards, item.link, item.name));
