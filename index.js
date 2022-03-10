@@ -56,10 +56,6 @@ function addCard(linkValue, titleValue) {
   cards.prepend(cardItem);
 };
 
-for (let i = 0; i < initialCards.length; i++) {
-  addCard(initialCards[i].link, initialCards[i].name)
-};
-
 function likeCardHandler(evt) {
   evt.target.classList.toggle('added');
 };
@@ -68,19 +64,23 @@ function removeCardHandler(evt) {
   evt.target.parentNode.remove();
 };
 
-function editProfileHandler() {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
+};
+
+function editProfileHandler() {
+  openPopup(popup);
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
 };
 
-function addFormHandler() {
-  popupAdd.classList.add('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 };
 
 function closeFormHandler() {
   for (let i = 0; i < popups.length; i++) {
-    popups[i].classList.remove('popup_opened')
+    closePopup(popups[i]);
   };
 };
 
@@ -88,11 +88,11 @@ function saveProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
   profileSubtitle.textContent = fieldInfo.value;
-  closeFormHandler();
+  closePopup(popup);
 };
 
 function openPhotoHandler(evt) {
-  popupPhoto.classList.add('popup_opened');
+  openPopup(popupPhoto);
   document.querySelector('.popup__photo').src = evt.target.src;
   document.querySelector('.popup__photo-title').textContent = evt.target.parentNode.querySelector('.card__title').textContent;
 };
@@ -102,7 +102,7 @@ for (let i=0; i < buttonsClose.length; i++) {
 };
 
 buttonEdit.addEventListener('click', editProfileHandler);
-buttonAdd.addEventListener('click', addFormHandler);
+buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 form.addEventListener('submit', saveProfile);
 
 сardFormNew.addEventListener('submit', function (evt) {
@@ -112,6 +112,9 @@ form.addEventListener('submit', saveProfile);
   addCard(image.value, title.value);
   title.value = '';
   image.value = '';
-  closeFormHandler();
+  closePopup(popupAdd);
 }); 
 
+for (let i = 0; i < initialCards.length; i++) {
+  addCard(initialCards[i].link, initialCards[i].name)
+};
