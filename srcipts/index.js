@@ -26,7 +26,7 @@ const initialCards = [
 ];
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
-const popup = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup_type_profile');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const popupAdd = document.querySelector('.popup_type_adder');
 const buttonsClose = document.querySelectorAll('.popup__button_type_close');
@@ -42,7 +42,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
-const imageFullTitle = document.querySelector('.popup__photo-title')
+const imageFullTitle = document.querySelector('.popup__photo-title');
 
 function createCard(linkValue, titleValue) {
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
@@ -74,7 +74,7 @@ function openPopup(popup) {
 function editProfile() {
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
-  openPopup(popup);
+  openPopup(popupProfile);
 };
 
 function closePopup(popup) {
@@ -89,7 +89,7 @@ function saveProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
   profileSubtitle.textContent = fieldInfo.value;
-  closePopup(popup);
+  closePopup(popupProfile);
 };
 
 function openPhoto(evt) {
