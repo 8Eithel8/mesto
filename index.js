@@ -41,6 +41,8 @@ const popupPhoto = document.querySelector('.popup_type_photo');
 const cardTemplate = document.querySelector('#card-template').content;
 const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
+const imageFull = document.querySelector('.popup__photo');
+const imageFullTitle = document.querySelector('.popup__photo-title')
 
 function addCard(linkValue, titleValue) {
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
@@ -66,9 +68,9 @@ function openPopup(popup) {
 };
 
 function editProfile() {
-  openPopup(popup);
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
+  openPopup(popup);
 };
 
 function closePopup(popup) {
@@ -87,19 +89,14 @@ function saveProfile(evt) {
 };
 
 function openPhoto(evt) {
+  const title = evt.target.parentNode.querySelector('.card__title').textContent;
+  imageFull.src = evt.target.src;
+  imageFullTitle.textContent = title;
+  imageFull.alt = title;
   openPopup(popupPhoto);
-  document.querySelector('.popup__photo').src = evt.target.src;
-  document.querySelector('.popup__photo-title').textContent = evt.target.parentNode.querySelector('.card__title').textContent;
 };
 
-buttonsClose.forEach( button => button.addEventListener('click', closeForm));
-
-
-buttonEdit.addEventListener('click', editProfile);
-buttonAdd.addEventListener('click', () => openPopup(popupAdd));
-form.addEventListener('submit', saveProfile);
-
-сardFormNew.addEventListener('submit', function (evt) {
+function submitCard(evt) {
   evt.preventDefault();
   let image = inputPhotoLink;
   let title = inputPhotoName; 
@@ -107,8 +104,13 @@ form.addEventListener('submit', saveProfile);
   title.value = '';
   image.value = '';
   closePopup(popupAdd);
-}); 
+}
 
-for (let i = 0; i < initialCards.length; i++) {
-  addCard(initialCards[i].link, initialCards[i].name)
-};
+buttonsClose.forEach(button => button.addEventListener('click', closeForm));
+
+buttonEdit.addEventListener('click', editProfile);
+buttonAdd.addEventListener('click', () => openPopup(popupAdd));
+form.addEventListener('submit', saveProfile);
+сardFormNew.addEventListener('submit', submitCard); 
+
+initialCards.forEach(item => addCard(item.link, item.name));
