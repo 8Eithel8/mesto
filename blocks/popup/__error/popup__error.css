@@ -1,0 +1,17 @@
+.popup__label-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup__error {
+font-weight: 400;
+font-size: 12px;
+line-height: 15px;
+color: #FF0000;
+margin-top: 3px;
+}
+
+.popup__error_unactive {
+  opacity: 0;
+}
+  
