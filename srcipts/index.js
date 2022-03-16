@@ -43,6 +43,7 @@ const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
 const imageFullTitle = document.querySelector('.popup__photo-title');
+const popups = document.querySelectorAll('.popup');
 
 function createCard(linkValue, titleValue) {
   const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
@@ -89,6 +90,12 @@ function closeForm(evt) {
   closePopup(evt.target.closest('.popup'));
 };
 
+function closeOverlay(evt) {
+  if (evt.currentTarget === evt.target) {
+    closePopup(evt.target);
+  };
+};
+
 function saveProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = fieldName.value;
@@ -111,6 +118,8 @@ function submitCard(evt) {
   inputPhotoLink.value = '';
   closePopup(popupAdd);
 }
+
+popups.forEach(popup => popup.addEventListener('click', closeOverlay));
 
 closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
