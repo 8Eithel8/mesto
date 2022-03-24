@@ -120,6 +120,11 @@ function submitCard(evt) {
 }
 
 popups.forEach(popup => popup.addEventListener('click', closeOverlay));
+document.addEventListener('keydown', function(evt) {
+   if (evt.key === "Escape") {
+    popups.forEach(popup => closePopup(popup));
+  };
+});
 
 closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
@@ -129,6 +134,5 @@ profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard); 
 
 initialCards.forEach(item => addCard(cards, item.link, item.name));
-
 
 
