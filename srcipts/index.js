@@ -129,3 +129,6 @@ profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard); 
 
 initialCards.forEach(item => addCard(cards, item.link, item.name));
+
+
+
