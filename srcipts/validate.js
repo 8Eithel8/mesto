@@ -20,7 +20,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   } else {
     hideInputError(formElement, inputElement, inputErrorClass, errorClass);
-  }
+  };
 };
 
 const hasInvalidInput = (inputList) => {
@@ -37,7 +37,7 @@ const toggleButtonState  = (inputList, buttonElement, inactiveButtonClass) => {
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute('disabled', false);
-  }
+  };
 }
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
