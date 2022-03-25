@@ -1,34 +1,8 @@
-const initialCards = [
-  {
-   name: 'Косинские поля',
-   link: './images/Kosinskie_polya.jpg'
- },
- {
-   name: 'Лосиный остров',
-   link: './images/Losinka.jpg'
- },
- {
-   name: 'Московская область. Восток',
-   link: './images/Mos_obl.jpg'
- },
- {
-   name: 'Тверская область. Река Сестра',
-   link: './images/Tver_obl.jpg'
- },
- {
-   name: 'Святое озеро',
-   link: './images/Svyatoe_ozero.jpg'
- },
- {
-   name: 'Черное озеро',
-   link: './images/Chernoe_ozero.jpg'
- }
-];
-
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const popupAdd = document.querySelector('.popup_type_adder');
+const buttonSave = popupAdd.querySelector('.popup__button_submit');
 const closeButtons = document.querySelectorAll('.popup__button_close');
 const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
@@ -99,8 +73,8 @@ function closeOverlay(evt) {
 };
 
 function closePopupByEsc(evt) {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.key === "Escape") {
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
@@ -123,9 +97,15 @@ function openPhoto(evt) {
 function submitCard(evt) {
   evt.preventDefault();
   addCard(cards, inputPhotoLink.value, inputPhotoName.value);
-  inputPhotoName.value = '';
-  inputPhotoLink.value = '';
+  сardFormNew.reset();
   closePopup(popupAdd);
+}
+
+function openPopupAdd() {
+  buttonSave.classList.add('popup__button_inactive');
+  console.log(buttonSave);
+  openPopup(popupAdd);
+  buttonSave.setAttribute('disabled', true);
 }
 
 popups.forEach(popup => popup.addEventListener('click', closeOverlay));
@@ -134,7 +114,7 @@ document.addEventListener('keydown', closePopupByEsc);
 closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
 buttonEdit.addEventListener('click', editProfile);
-buttonAdd.addEventListener('click', () => openPopup(popupAdd));
+buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard); 
 
