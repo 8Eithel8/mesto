@@ -26,7 +26,6 @@ function createCard(linkValue, titleValue) {
   cardImage.src = linkValue;
   cardImage.alt = titleValue;
   cardItem.querySelector('.card__title').textContent = titleValue;
-
   cardItem.querySelector('.card__like').addEventListener('click', likeCard);
   cardItem.querySelector('.card__remove').addEventListener('click', removeCard);
   cardImage.addEventListener('click', openPhoto);
@@ -102,10 +101,15 @@ function submitCard(evt) {
 }
 
 function openPopupAdd() {
-  buttonSave.classList.add('popup__button_inactive');
-  console.log(buttonSave);
-  openPopup(popupAdd);
+  const errorsMessage = popupAdd.querySelectorAll('.popup__error');
+  const errorsFields = popupAdd.querySelectorAll('.popup__field');
+
+  сardFormNew.reset();
   buttonSave.setAttribute('disabled', true);
+  buttonSave.classList.add('popup__button_inactive');
+  errorsMessage.forEach(error => error.classList.remove('popup__error_visible'));
+  errorsFields.forEach(error => error.classList.remove('popup__field_error'));
+  openPopup(popupAdd);
 }
 
 popups.forEach(popup => popup.addEventListener('click', closeOverlay));
@@ -116,6 +120,6 @@ closeButtons.forEach(button => button.addEventListener('click', closeForm));
 buttonEdit.addEventListener('click', editProfile);
 buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
-сardFormNew.addEventListener('submit', submitCard); 
+сardFormNew.addEventListener('submit', submitCard);
 
 initialCards.forEach(item => addCard(cards, item.link, item.name));

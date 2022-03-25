@@ -67,4 +67,4 @@ enableValidation({
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__field_error',
   errorClass: 'popup__error_visible'
-}); 
+});
