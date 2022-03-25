@@ -51,6 +51,7 @@ function openPopup(popup) {
 };
 
 function editProfile() {
+  resetErrorMessages(popupProfile);
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
   openPopup(popupProfile);
@@ -100,15 +101,18 @@ function submitCard(evt) {
   closePopup(popupAdd);
 }
 
-function openPopupAdd() {
-  const errorsMessage = popupAdd.querySelectorAll('.popup__error');
-  const errorsFields = popupAdd.querySelectorAll('.popup__field');
+function resetErrorMessages(popup) {
+  const errorsMessage = popup.querySelectorAll('.popup__error');
+  const errorsFields = popup.querySelectorAll('.popup__field');
+  errorsMessage.forEach(error => error.classList.remove('popup__error_visible'));
+  errorsFields.forEach(error => error.classList.remove('popup__field_error'));
+} 
 
+function openPopupAdd() {
   сardFormNew.reset();
   buttonSave.setAttribute('disabled', true);
   buttonSave.classList.add('popup__button_inactive');
-  errorsMessage.forEach(error => error.classList.remove('popup__error_visible'));
-  errorsFields.forEach(error => error.classList.remove('popup__field_error'));
+  resetErrorMessages(popupAdd);
   openPopup(popupAdd);
 }
 
