@@ -1,7 +1,8 @@
+import { openPhoto } from './index.js';
 export default class Card {
   constructor(data, cardSelector) {    // теперь здесь один параметр — селектор? что нужно вписать в родительский  класс
-     this._title = data.name;
-     this._image = data.link;
+     this.title = data.name;
+     this.image = data.link;
      this._cardSelector = cardSelector//  записали селектор в приватное поле
   }
     _getTemplate() {
@@ -20,16 +21,17 @@ export default class Card {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
-    // Добавим данные
-    let cardImage = this._element.querySelector('.card__image');
+    this._cardImage = this._element.querySelector('.card__image');
     
     this._like = this._element.querySelector('.card__like');
     this._remove = this._element.querySelector('.card__remove');
     
     this._setEventListeners(); // вызовите _setEventListeners
-    cardImage.src = this._image;
-    cardImage.alt = this._title;
-    this._element.querySelector('.card__title').textContent = this._title;
+    
+    // Добавим данные
+    this._cardImage.src = this.image;
+    this._cardImage.alt = this.title;
+    this._element.querySelector('.card__title').textContent = this.title;
   
     // Вернём элемент наружу
     return this._element;
@@ -38,14 +40,8 @@ export default class Card {
   // ТУТ написать скрытые слушатели переписать под свои классы и свою логику
   
   _handleOpenPopup() {
-    popupImage.src = this._image;
-    popElement.classList.add('popup_is-opened');
+    openPhoto(this.image, this.title);
   } 
-  
-  _handleClosePopup() {
-    popupImage.src = '';
-     popElement.classList.remove('popup_is-opened');
-  }
   
   _toogleLike() {
     this._like.classList.toggle('added');
@@ -55,10 +51,10 @@ export default class Card {
     this._element.remove();
   };
 
-
   _setEventListeners() {
     this._like.addEventListener('click', () => this._toogleLike());
     this._remove.addEventListener('click', () => this._removeCard());
+    this._cardImage.addEventListener('click', () => this._handleOpenPopup());
   }
 
 

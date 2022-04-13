@@ -15,7 +15,6 @@ const profileForm = popupProfile.querySelector('.popup__form');
 const сardFormNew = popupAdd.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
 const popupPhoto = document.querySelector('.popup_type_photo');
-// const cardTemplate = document.querySelector('#card-template');
 const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
@@ -23,7 +22,7 @@ const imageFullTitle = document.querySelector('.popup__photo-title');
 const popups = document.querySelectorAll('.popup');
 
 function addCard(container, data) {
-const card = new Card(data, '#card-template');
+  const card = new Card(data, '#card-template');
   container.prepend(card.generateCard());
 };
 
@@ -70,9 +69,8 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 };
 
-function openPhoto(evt) {
-  const title = evt.target.alt;
-  imageFull.src = evt.target.src;
+export function openPhoto(image, title) {
+  imageFull.src = image;
   imageFullTitle.textContent = title;
   imageFull.alt = title;
   openPopup(popupPhoto);
@@ -80,7 +78,11 @@ function openPhoto(evt) {
 
 function submitCard(evt) {
   evt.preventDefault();
-  addCard(cards, inputPhotoLink.value, inputPhotoName.value);
+  const data = {
+    name: inputPhotoName.value,
+    link: inputPhotoLink.value
+  }
+  addCard(cards, data);
   сardFormNew.reset();
   closePopup(popupAdd);
 }
@@ -110,31 +112,4 @@ buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard);
 
-// initialCards.forEach(item => addCard(cards, item.link, item.name));
-
-initialCards.forEach(item => addCard(cards, item));
-
-
-/*класс*/
-// 3  попапа,  1 темплейт
-
-
-
- 
-
-
-
-
-  
-  //   messageList.forEach((item) => {
-  //      // Создадим экземпляр карточки
-  //     const card = new Card(item); // передаём объект аргументом
-  //     // Создаём карточку и возвращаем наружу
-  //     const cardElement = card.generateCard();
-  //       // Добавляем в DOM
-
-  //     document.querySelector('.cards').append(cardElement);
-
-  // }); 
-
-   
+initialCards.forEach(item => addCard(cards, item));   
