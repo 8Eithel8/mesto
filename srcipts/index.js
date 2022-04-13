@@ -1,3 +1,6 @@
+import { initialCards } from './initialCards.js';
+import Card from './Card.js';
+
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonAdd = document.querySelector('.profile__button_type_add');
@@ -12,38 +15,19 @@ const profileForm = popupProfile.querySelector('.popup__form');
 const сardFormNew = popupAdd.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
 const popupPhoto = document.querySelector('.popup_type_photo');
-const cardTemplate = document.querySelector('#card-template').content;
+// const cardTemplate = document.querySelector('#card-template');
 const inputPhotoName = document.querySelector('#photo-name');
 const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
 const imageFullTitle = document.querySelector('.popup__photo-title');
 const popups = document.querySelectorAll('.popup');
 
-function createCard(linkValue, titleValue) {
-  const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImage = cardItem.querySelector('.card__image');
-  
-  cardImage.src = linkValue;
-  cardImage.alt = titleValue;
-  cardItem.querySelector('.card__title').textContent = titleValue;
-  cardItem.querySelector('.card__like').addEventListener('click', likeCard);
-  cardItem.querySelector('.card__remove').addEventListener('click', removeCard);
-  cardImage.addEventListener('click', openPhoto);
-  
-  return cardItem;
+function addCard(container, data) {
+const card = new Card(data, '#card-template');
+  container.prepend(card.generateCard());
 };
 
-function addCard(container, linkValue, titleValue) {
-  container.prepend(createCard(linkValue, titleValue));
-};
 
-function likeCard(evt) {
-  evt.target.classList.toggle('added');
-};
-
-function removeCard(evt) {
-  evt.target.closest('.card').remove();
-};
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -126,4 +110,31 @@ buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard);
 
-initialCards.forEach(item => addCard(cards, item.link, item.name));
+// initialCards.forEach(item => addCard(cards, item.link, item.name));
+
+initialCards.forEach(item => addCard(cards, item));
+
+
+/*класс*/
+// 3  попапа,  1 темплейт
+
+
+
+ 
+
+
+
+
+  
+  //   messageList.forEach((item) => {
+  //      // Создадим экземпляр карточки
+  //     const card = new Card(item); // передаём объект аргументом
+  //     // Создаём карточку и возвращаем наружу
+  //     const cardElement = card.generateCard();
+  //       // Добавляем в DOM
+
+  //     document.querySelector('.cards').append(cardElement);
+
+  // }); 
+
+   
