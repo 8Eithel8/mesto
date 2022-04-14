@@ -5,35 +5,34 @@ export default class Card {
      this.image = data.link;
      this._cardSelector = cardSelector; //  записали селектор в приватное поле
   };
-    _getTemplate() {
-    // забираем разметку из HTML и клонируем элемент
-      const cardElement = document
-        .querySelector(this._cardSelector)
-        .content
-        .querySelector('.card')
-        .cloneNode(true);
-      
-    // вернём DOM-элемент карточки
-      return cardElement;
-    };
+  _getTemplate() {
+  // получаем разметку из HTML и клонируем элемент
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
+    
+  // возвращаем DOM-элемент карточки
+    return cardElement;
+  };
   
   generateCard() {
-    // Запишем разметку в приватное поле _element. 
-    // Так у других элементов появится доступ к ней.
+    // сохраняем разметку в приватное поле _element  
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.card__image');
     
     this._like = this._element.querySelector('.card__like');
     this._remove = this._element.querySelector('.card__remove');
     
-    this._setEventListeners(); // вызовите _setEventListeners
+    this._setEventListeners(); 
     
-    // Добавим данные
+    // Добавляем данные
     this._cardImage.src = this.image;
     this._cardImage.alt = this.title;
     this._element.querySelector('.card__title').textContent = this.title;
   
-    // Вернём элемент наружу
+    // возвращаем элемент во внешнюю область
     return this._element;
   };
 

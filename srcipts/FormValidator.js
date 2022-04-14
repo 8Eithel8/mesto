@@ -17,14 +17,14 @@ export default class FormValidator {
      this._setEventListeners();
   };
 
-  //проверяем на валидность форму
+  // проверяем на валидность форму
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   };
 
-  //переключаем доступность кнопки в зависимости от результата валидации
+  // переключаем доступность кнопки в зависимости от результата валидации
   _toggleButtonState () {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -35,13 +35,13 @@ export default class FormValidator {
     };
   };
 
-  //ищем элемент с ошибкой
+  // ищем элемент с ошибкой
   _getErrorElement (id) {
     return this._formElement.querySelector(`.${id}-error`);
   };
 
 
-  //показаываем текст ошибки
+  // показаываем текст ошибки
   _showInputError (inputElement) {
     const errorElement = this._getErrorElement(inputElement.id);
   
@@ -50,7 +50,7 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   };
   
-  //скрываем текст ошибки
+  // скрываем текст ошибки
   _hideInputError (inputElement) {
     const errorElement = this._getErrorElement(inputElement.id);
     inputElement.classList.remove(this._inputErrorClass);
@@ -58,7 +58,7 @@ export default class FormValidator {
     errorElement.textContent = '';
   };
 
-  //проверяем конкретное поле на валидность, показываем ошибку или скрываем
+  // проверяем конкретное поле на валидность, показываем ошибку или скрываем
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
@@ -67,7 +67,7 @@ export default class FormValidator {
     };
   };
 
-  //уставнавливаем слушатели на поля и переключаем кнопку
+  // уставнавливаем слушатели на поля и переключаем кнопку
   _setEventListeners () {
     this._toggleButtonState();
   
