@@ -1,9 +1,9 @@
 import { openPhoto } from './index.js';
 export default class Card {
-  constructor(data, cardSelector) {    // теперь здесь один параметр — селектор? что нужно вписать в родительский  класс
+  constructor(data, cardSelector) {   
      this.title = data.name;
      this.image = data.link;
-     this._cardSelector = cardSelector//  записали селектор в приватное поле
+     this._cardSelector = cardSelector //  записали селектор в приватное поле
   }
     _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
@@ -37,7 +37,7 @@ export default class Card {
     return this._element;
   }
 
-  // ТУТ написать скрытые слушатели переписать под свои классы и свою логику
+  // скрытые слушатели 
   
   _handleOpenPopup() {
     openPhoto(this.image, this.title);

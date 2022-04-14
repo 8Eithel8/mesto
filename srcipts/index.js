@@ -114,3 +114,17 @@ profileForm.addEventListener('submit', saveProfile);
 сardFormNew.addEventListener('submit', submitCard);
 
 initialCards.forEach(item => addCard(cards, item));   
+
+const settingsValidation = {
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button_submit',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__field_error',
+  errorClass: 'popup__error_visible'
+}
+
+// создаем экземпляра валидаторв для каждой формы и проверяем 
+const profileFormValidator = new FormValidator(settingsValidation, profileForm);
+const adderFormValidator = new FormValidator(settingsValidation, сardFormNew);
+profileFormValidator.enableValidation();
+adderFormValidator.enableValidation();
