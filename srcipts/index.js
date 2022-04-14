@@ -1,5 +1,6 @@
 import { initialCards } from './initialCards.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popupProfile = document.querySelector('.popup_type_profile');

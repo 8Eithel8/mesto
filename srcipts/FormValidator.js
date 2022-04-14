@@ -1,3 +1,8 @@
+export default class FormValidator {
+  constructor(settings, form)
+}
+
+
 const getErrorElement = (formElement, id) =>  formElement.querySelector(`.${id}-error`);
 
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
@@ -68,3 +73,4 @@ enableValidation({
   inputErrorClass: 'popup__field_error',
   errorClass: 'popup__error_visible'
 });
+
