@@ -6,14 +6,13 @@ const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popupProfile = document.querySelector('.popup_type_profile');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const popupAdd = document.querySelector('.popup_type_adder');
-const buttonSave = popupAdd.querySelector('.popup__button_submit');
 const closeButtons = document.querySelectorAll('.popup__button_close');
 const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileForm = popupProfile.querySelector('.popup__form');
-const сardFormNew = popupAdd.querySelector('.popup__form');
+const cardFormNew = popupAdd.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
 const popupPhoto = document.querySelector('.popup_type_photo');
 const inputPhotoName = document.querySelector('#photo-name');
@@ -22,6 +21,18 @@ const imageFull = document.querySelector('.popup__photo');
 const imageFullTitle = document.querySelector('.popup__photo-title');
 const popups = document.querySelectorAll('.popup');
 const cardTemplate = '#card-template';
+
+const settingsValidation = {
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button_submit',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__field_error',
+  errorClass: 'popup__error_visible'
+};
+
+// создаем экземпляра валидаторв для каждой формы и проверяем 
+const profileFormValidator = new FormValidator(settingsValidation, profileForm);
+const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 function addCard(container, data) {
   const card = new Card(data, cardTemplate);
@@ -34,7 +45,7 @@ function openPopup(popup) {
 };
 
 function editProfile() {
-  resetErrorMessages(popupProfile);
+  profileFormValidator.resetForm();
   fieldName.value = profileTitle.textContent;
   fieldInfo.value = profileSubtitle.textContent;
   openPopup(popupProfile);
@@ -83,22 +94,14 @@ function submitCard(evt) {
     link: inputPhotoLink.value
   }
   addCard(cards, data);
-  сardFormNew.reset();
+  cardFormNew.reset();
   closePopup(popupAdd);
 };
 
-function resetErrorMessages(popup) {
-  const errorsMessage = popup.querySelectorAll('.popup__error');
-  const errorsFields = popup.querySelectorAll('.popup__field');
-  errorsMessage.forEach(error => error.classList.remove('popup__error_visible'));
-  errorsFields.forEach(error => error.classList.remove('popup__field_error'));
-};
-
 function openPopupAdd() {
-  сardFormNew.reset();
-  buttonSave.setAttribute('disabled', true);
-  buttonSave.classList.add('popup__button_inactive');
-  resetErrorMessages(popupAdd);
+  cardFormNew.reset();
+  adderFormValidator.disableSubmitButton();
+  adderFormValidator.resetForm();
   openPopup(popupAdd);
 };
 
@@ -110,20 +113,9 @@ closeButtons.forEach(button => button.addEventListener('click', closeForm));
 buttonEdit.addEventListener('click', editProfile);
 buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
-сardFormNew.addEventListener('submit', submitCard);
+cardFormNew.addEventListener('submit', submitCard);
 
 initialCards.forEach(item => addCard(cards, item));   
 
-const settingsValidation = {
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__button_submit',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__field_error',
-  errorClass: 'popup__error_visible'
-};
-
-// создаем экземпляра валидаторв для каждой формы и проверяем 
-const profileFormValidator = new FormValidator(settingsValidation, profileForm);
-const adderFormValidator = new FormValidator(settingsValidation, сardFormNew);
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();

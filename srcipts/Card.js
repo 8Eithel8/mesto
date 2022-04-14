@@ -6,15 +6,13 @@ export default class Card {
      this._cardSelector = cardSelector; //  записали селектор в приватное поле
   };
   _getTemplate() {
-  // получаем разметку из HTML и клонируем элемент
-    const cardElement = document
+  // получаем разметку из HTML, клонируем элемент
+  // и возвращаем DOM-элемент карточки
+    return document
       .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
-    
-  // возвращаем DOM-элемент карточки
-    return cardElement;
   };
   
   generateCard() {

@@ -1,4 +1,3 @@
-
 export default class FormValidator {
 
   constructor(settings, form) {
@@ -24,14 +23,24 @@ export default class FormValidator {
     });
   };
 
+  // делаем кнопку неактивной
+  disableSubmitButton () {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', true);
+  };
+  
+  // делаем кнопку активной
+  _enableSubmitButton () {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled', false);
+  };
+
   // переключаем доступность кнопки в зависимости от результата валидации
   _toggleButtonState () {
     if (this._hasInvalidInput(this._inputList)) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute('disabled', true);
+      this.disableSubmitButton();
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.removeAttribute('disabled', false);
+      this._enableSubmitButton();
     };
   };
 
@@ -39,7 +48,6 @@ export default class FormValidator {
   _getErrorElement (id) {
     return this._formElement.querySelector(`.${id}-error`);
   };
-
 
   // показаываем текст ошибки
   _showInputError (inputElement) {
@@ -66,6 +74,11 @@ export default class FormValidator {
       this._hideInputError(inputElement);
     };
   };
+
+  // сбрасываем ошибки формы
+  resetForm () {
+    this._inputList.forEach(field => this._hideInputError(field));   
+  } 
 
   // уставнавливаем слушатели на поля и переключаем кнопку
   _setEventListeners () {
