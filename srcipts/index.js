@@ -21,13 +21,12 @@ const inputPhotoLink = document.querySelector('#photo-link');
 const imageFull = document.querySelector('.popup__photo');
 const imageFullTitle = document.querySelector('.popup__photo-title');
 const popups = document.querySelectorAll('.popup');
+const cardTemplate = '#card-template';
 
 function addCard(container, data) {
-  const card = new Card(data, '#card-template');
+  const card = new Card(data, cardTemplate);
   container.prepend(card.generateCard());
 };
-
-
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -86,14 +85,14 @@ function submitCard(evt) {
   addCard(cards, data);
   сardFormNew.reset();
   closePopup(popupAdd);
-}
+};
 
 function resetErrorMessages(popup) {
   const errorsMessage = popup.querySelectorAll('.popup__error');
   const errorsFields = popup.querySelectorAll('.popup__field');
   errorsMessage.forEach(error => error.classList.remove('popup__error_visible'));
   errorsFields.forEach(error => error.classList.remove('popup__field_error'));
-} 
+};
 
 function openPopupAdd() {
   сardFormNew.reset();
@@ -101,7 +100,7 @@ function openPopupAdd() {
   buttonSave.classList.add('popup__button_inactive');
   resetErrorMessages(popupAdd);
   openPopup(popupAdd);
-}
+};
 
 popups.forEach(popup => popup.addEventListener('click', closeOverlay));
 document.addEventListener('keydown', closePopupByEsc);
@@ -121,7 +120,7 @@ const settingsValidation = {
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__field_error',
   errorClass: 'popup__error_visible'
-}
+};
 
 // создаем экземпляра валидаторв для каждой формы и проверяем 
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);

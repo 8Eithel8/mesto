@@ -3,19 +3,19 @@ export default class Card {
   constructor(data, cardSelector) {   
      this.title = data.name;
      this.image = data.link;
-     this._cardSelector = cardSelector //  записали селектор в приватное поле
-  }
+     this._cardSelector = cardSelector; //  записали селектор в приватное поле
+  };
     _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
       const cardElement = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.card')
-      .cloneNode(true);
+        .querySelector(this._cardSelector)
+        .content
+        .querySelector('.card')
+        .cloneNode(true);
       
     // вернём DOM-элемент карточки
       return cardElement;
-    }
+    };
   
   generateCard() {
     // Запишем разметку в приватное поле _element. 
@@ -35,17 +35,17 @@ export default class Card {
   
     // Вернём элемент наружу
     return this._element;
-  }
+  };
 
-  // скрытые слушатели 
+  // скрытые слушатели
   
   _handleOpenPopup() {
     openPhoto(this.image, this.title);
-  } 
+  };
   
   _toogleLike() {
     this._like.classList.toggle('added');
-  };  
+  };
 
   _removeCard() {
     this._element.remove();
@@ -55,7 +55,5 @@ export default class Card {
     this._like.addEventListener('click', () => this._toogleLike());
     this._remove.addEventListener('click', () => this._removeCard());
     this._cardImage.addEventListener('click', () => this._handleOpenPopup());
-  }
-
-
-}
+  };
+};

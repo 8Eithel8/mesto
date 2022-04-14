@@ -2,12 +2,12 @@
 export default class FormValidator {
 
   constructor(settings, form) {
-    this._formElement = form,
-    this._inputSelector = settings.inputSelector,
-    this._submitButtonSelector = settings.submitButtonSelector,
-    this._inactiveButtonClass = settings.inactiveButtonClass,
-    this._inputErrorClass = settings.inputErrorClass,
-    this._errorClass = settings.errorClass
+    this._formElement = form;
+    this._inputSelector = settings.inputSelector;
+    this._submitButtonSelector = settings.submitButtonSelector;
+    this._inactiveButtonClass = settings.inactiveButtonClass;
+    this._inputErrorClass = settings.inputErrorClass;
+    this._errorClass = settings.errorClass;
   };
 
   // нашли поля  икнопку  формы
@@ -60,12 +60,12 @@ export default class FormValidator {
 
   //проверяем конкретное поле на валидность, показываем ошибку или скрываем
   _checkInputValidity(inputElement) {
-  if (!inputElement.validity.valid) {
-    this._showInputError(inputElement);
-  } else {
-    this._hideInputError(inputElement);
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
+    } else {
+      this._hideInputError(inputElement);
+    };
   };
-};
 
   //уставнавливаем слушатели на поля и переключаем кнопку
   _setEventListeners () {
