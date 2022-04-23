@@ -1,6 +1,14 @@
 import { initialCards } from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Popup from "./Popup.js";
+// import Section from "./Section.js";
+// import PopupWithForm from "./PopupWithForm.js";
+// import UserInfo from "./UserInfo.js";
+import PopupWithImage from "./PopupWithImage.js";
+
+
+
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -39,6 +47,7 @@ function addCard(container, data) {
   container.prepend(card.generateCard());
 };
 
+/*скорпировано*/
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
@@ -50,7 +59,7 @@ function editProfile() {
   fieldInfo.value = profileSubtitle.textContent;
   openPopup(popupProfile);
 };
-
+/*скорпировано*/
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
@@ -59,18 +68,25 @@ function closePopup(popup) {
 function closeForm(evt) {
   closePopup(evt.target.closest('.popup'));
 };
-
+/*скорпировано*/
 function closeOverlay(evt) {
   if (evt.currentTarget === evt.target) {
     closePopup(evt.target);
   };
 };
-
+/*скорпировано*/
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
+};
+
+export function openPhoto(image, title) {
+  imageFull.src = image;
+  imageFullTitle.textContent = title;
+  imageFull.alt = title;
+  openPopup(popupPhoto);
 };
 
 function saveProfile(evt) {
@@ -80,12 +96,7 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 };
 
-export function openPhoto(image, title) {
-  imageFull.src = image;
-  imageFullTitle.textContent = title;
-  imageFull.alt = title;
-  openPopup(popupPhoto);
-};
+
 
 function submitCard(evt) {
   evt.preventDefault();

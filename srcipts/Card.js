@@ -1,3 +1,8 @@
+/*TODO ## Преобразуйте класс `Card`
+
+Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию `handleCardClick`.
+Эта функция должна открывать попап с картинкой при клике на карточку.*/
+
 import { openPhoto } from './index.js';
 export default class Card {
   constructor(data, cardSelector) {   
