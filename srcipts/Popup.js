@@ -34,13 +34,13 @@ export default class Popup {
         };
    };
 
-   _setEventListeners() {
+   setEventListeners() {
 
        /*this._closeButtons что делать с этим ?  эта кнопка закрывает попап, но ее нет в параметрах*/
        const closeButton = this._popup.querySelector('.popup__button_close');
 
        closeButton.addEventListener('click', () => this.close());
-       this._popup.addEventListener('click', () => this._closeOverlay());
+       this._popup.addEventListener('click', (evt) => this._closeOverlay(evt));
        // document.addEventListener('keydown', () => this._handleEscClose);
    };
 

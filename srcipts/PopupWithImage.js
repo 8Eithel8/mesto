@@ -6,13 +6,14 @@
 
 import Popup from "./Popup.js";
  export default  class PopupWithImage extends Popup {
-
+//переопределяем метод open
       open(image, title) {
           this._image = this._popup.querySelector('.popup__photo');
           this._title = this._popup.querySelector('.popup__photo-title');
           this._image.src = image;
           this._title.textContent = title;
           this._image.alt = title;
+          super.open(); //вызываем  метод из родительского класса
       };
      // export function openPhoto(image, title) {
      //     imageFull.src = image;
