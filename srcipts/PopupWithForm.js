@@ -12,6 +12,8 @@
 
 Для каждого попапа создавайте свой экземпляр класса `PopupWithForm`.*/
 import Popup from "./Popup.js";
+import {settingsValidation} from "./index.js";
+import FormValidator from "./FormValidator.js";
 export default class PopupWithForm extends Popup {
     constructor(selector, handleSubmit) {
         super(selector);
@@ -32,6 +34,13 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             this._handleSubmit(this._getInputValues());
             this.close();
-        })
+        });
+        this._validator = new FormValidator(settingsValidation, this._form);
+        this._validator.enableValidation();
     }
-}
+
+    close() {
+        super.close();
+      this._validator.reset();
+    }
+};

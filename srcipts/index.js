@@ -30,7 +30,7 @@ const cards = document.querySelector('.cards');
 const popups = document.querySelectorAll('.popup');
 const cardTemplate = '#card-template';
 
-const settingsValidation = {
+export const settingsValidation = {
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__button_submit',
   inactiveButtonClass: 'popup__button_inactive',
@@ -40,7 +40,7 @@ const settingsValidation = {
 
 // создаем экземпляра валидаторв для каждой формы и проверяем 
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);
-const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
+// const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 function addCard(container, data) {
   const card = new Card(data, cardTemplate);
@@ -129,7 +129,7 @@ profileForm.addEventListener('submit', saveProfile);
 initialCards.forEach(item => addCard(cards, item));   
 
 profileFormValidator.enableValidation();
-adderFormValidator.enableValidation();
+// adderFormValidator.enableValidation();
 
 export const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(cards, data));
