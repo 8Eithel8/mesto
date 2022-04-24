@@ -23,10 +23,10 @@ const profileForm = popupProfile.querySelector('.popup__form');
 const cardFormNew = popupAddOld.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
 // const popupPhoto = document.querySelector('.popup_type_photo');
-const inputPhotoName = document.querySelector('#photo-name');
-const inputPhotoLink = document.querySelector('#photo-link');
-const imageFull = document.querySelector('.popup__photo');
-const imageFullTitle = document.querySelector('.popup__photo-title');
+// const inputPhotoName = document.querySelector('#photo-name');
+// const inputPhotoLink = document.querySelector('#photo-link');
+// const imageFull = document.querySelector('.popup__photo');
+// const imageFullTitle = document.querySelector('.popup__photo-title');
 const popups = document.querySelectorAll('.popup');
 const cardTemplate = '#card-template';
 
@@ -98,16 +98,16 @@ function saveProfile(evt) {
 
 
 
-function submitCard(evt) {
-  evt.preventDefault();
-  const data = {
-    name: inputPhotoName.value,
-    link: inputPhotoLink.value
-  }
-  addCard(cards, data);
-  cardFormNew.reset();
-  closePopup(popupAdd);
-};
+// function submitCard(evt) {
+//   evt.preventDefault();
+//   const data = {
+//     name: inputPhotoName.value,
+//     link: inputPhotoLink.value
+//   }
+//   addCard(cards, data);
+//   cardFormNew.reset();
+//   closePopup(popupAdd);
+// };
 
 function openPopupAdd() {
   cardFormNew.reset();
@@ -122,9 +122,9 @@ document.addEventListener('keydown', closePopupByEsc);
 closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
 buttonEdit.addEventListener('click', editProfile);
-buttonAdd.addEventListener('click', () => openPopupAdd());
+// buttonAdd.addEventListener('click', () => openPopupAdd());
 profileForm.addEventListener('submit', saveProfile);
-cardFormNew.addEventListener('submit', submitCard);
+// cardFormNew.addEventListener('submit', submitCard);
 
 initialCards.forEach(item => addCard(cards, item));   
 
@@ -132,15 +132,7 @@ profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
 
 export const popupPhoto = new PopupWithImage('.popup_type_photo');
-const popupAdd = new PopupWithForm('.popup_type_adder');
+const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(cards, data));
 popupPhoto.setEventListeners();
-
-function submitAddForm(values) {
-    const data = {
-    name: inputPhotoName.value,
-    link: inputPhotoLink.value
-  }
-  addCard(cards, data);
-  cardFormNew.reset();
-  closePopup(popupAdd);
-};
+popupAdd.setEventListeners();
+buttonAdd.addEventListener('click', () => popupAdd.open());
