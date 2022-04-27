@@ -1,0 +1,35 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Третий проект в курсе обучения Яндекс.Пракутикум по специальности вэб-разработчик и это первый проект, в котором часть интерактива написана на JavaScript. Данная страница предназначена для желающих поделиться своими фотографиями из различных уголков России. Предусмотрен функционал добавления и удаления фотографий, возможность выделить, понравившуюся фотографию лайком.",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8Eithel8/mesto.git"
+  },
+  "author": "Aulitina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/8Eithel8/mesto/issues"
+  },
+  "homepage": "https://github.com/8Eithel8/mesto#readme",
+  "dependencies": {
+    "core-js": "^3.22.2"
+  }
+}

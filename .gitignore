@@ -1,0 +1,4 @@
+node_modules
+dist
+# Файлы редактора
+.idea
