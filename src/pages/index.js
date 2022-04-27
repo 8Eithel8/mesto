@@ -1,11 +1,11 @@
-import { initialCards } from './initialCards.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Popup from "./Popup.js";
+import { initialCards } from '../srcipts/initialCards.js';
+import Card from '../srcipts/Card.js';
+import FormValidator from '../srcipts/FormValidator.js';
+import Popup from "../srcipts/Popup.js";
 // import Section from "./Section.js";
-import PopupWithForm from "./PopupWithForm.js";
+import PopupWithForm from "../srcipts/PopupWithForm.js";
 // import UserInfo from "./UserInfo.js";
-import PopupWithImage from "./PopupWithImage.js";
+import PopupWithImage from "../srcipts/PopupWithImage.js";
 
 
 
