@@ -5,7 +5,7 @@ import FormValidator from '../components/FormValidator.js';
 import Popup from "../components/Popup.js";
 // import Section from "./Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-// import UserInfo from "./UserInfo.js";
+import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 
@@ -42,6 +42,9 @@ export const settingsValidation = {
 // создаем экземпляра валидаторв для каждой формы и проверяем 
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 // const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
+
+const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
+console.log(userProfile);
 
 function addCard(container, data) {
   const card = new Card(data, cardTemplate);
