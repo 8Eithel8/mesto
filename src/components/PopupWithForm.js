@@ -12,7 +12,7 @@
 
 Для каждого попапа создавайте свой экземпляр класса `PopupWithForm`.*/
 import Popup from "./Popup.js";
-import {settingsValidation} from "../index.js";
+import {settingsValidation} from "../pages/index.js";
 import FormValidator from "./FormValidator.js";
 export default class PopupWithForm extends Popup {
     constructor(selector, handleSubmit) {
