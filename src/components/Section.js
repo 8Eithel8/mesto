@@ -9,7 +9,7 @@
 
 У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.*/
 
-import { initialCards } from './initialCards.js';
+import { initialCards } from '../Utils/initialCards.js';
 import Card from './Card.js';
 
 export default class Section  {
