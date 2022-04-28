@@ -1,6 +1,4 @@
-/* TODO Создайте класс `PopupWithImage`
-
-    Создайте класс `PopupWithImage`, который наследует от `Popup`.
+/*  класс `PopupWithImage`, который наследует от `Popup`.
     Этот класс должен перезаписывать родительский метод `open`. В методе `open` класса `PopupWithImage`
     нужно вставлять в попап картинку и атрибут `src` изображения.*/
 
@@ -15,10 +13,5 @@ import Popup from "./Popup.js";
           this._image.alt = title;
           super.open(); //вызываем  метод из родительского класса
       };
-     // export function openPhoto(image, title) {
-     //     imageFull.src = image;
-     //     imageFullTitle.textContent = title;
-     //     imageFull.alt = title;
-     //     openPopup(popupPhoto);
-     // };
+
 }

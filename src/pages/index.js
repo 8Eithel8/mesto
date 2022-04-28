@@ -3,12 +3,10 @@ import { initialCards } from '../Utils/initialCards.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Popup from "../components/Popup.js";
-// import Section from "./Section.js";
+import Section from "./Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-
-
 
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
@@ -52,70 +50,48 @@ function addCard(container, data) {
 };
 
 /*скорпировано*/
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-};
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupByEsc);
+// };
 
-function editProfile() {
-  profileFormValidator.resetForm();
-  //объект userInfo, созданный из класса,
-  // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
-  const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
-  fieldName.value = name;
-  fieldInfo.value = info;
-  openPopup(popupProfile);
-};
+// function editProfile() {
+//   profileFormValidator.resetForm();
+//   //объект userInfo, созданный из класса,
+//   // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+//   const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+//   fieldName.value = name;
+//   fieldInfo.value = info;
+//   openPopup(popupProfile);
+// };
 
-function saveProfile(evt) {
-  evt.preventDefault();
-  userProfile.setUserInfo(fieldName.value, fieldInfo.value);
-  closePopup(popupProfile);
-};
-
-/*скорпировано*/
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc);
-};
+// function saveProfile(evt) {
+//   evt.preventDefault();
+//   userProfile.setUserInfo(fieldName.value, fieldInfo.value);
+//   closePopup(popupProfile);
+// };
+//
+// /*скорпировано*/
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupByEsc);
+// };
 
 function closeForm(evt) {
   closePopup(evt.target.closest('.popup'));
 };
-/*скорпировано*/
-function closeOverlay(evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup(evt.target);
-  };
-};
-/*скорпировано*/
-function closePopupByEsc(evt) {
-  if (evt.key === "Escape") {
-    const activePopup = document.querySelector('.popup_opened');
-    closePopup(activePopup);
-  };
-};
-
-// export function openPhoto(image, title) {
-//   imageFull.src = image;
-//   imageFullTitle.textContent = title;
-//   imageFull.alt = title;
-//   openPopup(popupPhoto);
+// /*скорпировано*/
+// function closeOverlay(evt) {
+//   if (evt.currentTarget === evt.target) {
+//     closePopup(evt.target);
+//   };
 // };
-
-
-
-
-
-// function submitCard(evt) {
-//   evt.preventDefault();
-//   const data = {
-//     name: inputPhotoName.value,
-//     link: inputPhotoLink.value
-//   }
-//   addCard(cards, data);
-//   cardFormNew.reset();
-//   closePopup(popupAdd);
+// /*скорпировано*/
+// function closePopupByEsc(evt) {
+//   if (evt.key === "Escape") {
+//     const activePopup = document.querySelector('.popup_opened');
+//     closePopup(activePopup);
+//   };
 // };
 
 function openPopupAdd() {
@@ -141,7 +117,20 @@ profileFormValidator.enableValidation();
 // adderFormValidator.enableValidation();
 
 export const popupPhoto = new PopupWithImage('.popup_type_photo');
+//Для каждого попапа создаем свой экземпляр класса `PopupWithForm`.
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(cards, data));
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
 buttonAdd.addEventListener('click', () => popupAdd.open());
+
+
+
+
+const sectionCard = new Section({
+    data: items,
+    renderer: (item) => {
+        const card = new Card(item, '.card');
+        const cardElement = card.generateCard();
+        sectionCard.addItem(cardElement);
+    }
+}, cardListSelector);

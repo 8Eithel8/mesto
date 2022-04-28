@@ -13,13 +13,23 @@ import { initialCards } from '../Utils/initialCards.js';
 import Card from './Card.js';
 
 export default class Section  {
-    constructor (items, selector) {
-
+    constructor ({ items, renderer }, selector) {
+        this._renderedItems = items;
+        this._renderer = renderer;
+        this._container = document.querySelector(selector);
     };
 
-    _renderer () {};
+    //публичный метод отвечает за отрисовку каждого отдельного элемента
+    renderer () {
+        this._renderedItems.forEach(item => {
+            this._renderer(item);
+        });
+    };
 
-    addItem () {}; /*это не олдно и тоже что и addCard???*/
-    initialCards.forEach(item => addCard(cards, item));
+    //убличный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
+    addItem (element) {
+        this._container.append(element);
+    };
+
 };
 
