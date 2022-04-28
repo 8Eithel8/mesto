@@ -1,14 +1,10 @@
-/*TODO ## Преобразуйте класс `Card`
-
-Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию `handleCardClick`.
-Эта функция должна открывать попап с картинкой при клике на карточку.*/
-
 import { popupPhoto } from '../pages/index.js';
 export default class Card {
-  constructor(data, cardSelector) {   
+  constructor(data, cardSelector, handleCardClick) {
      this.title = data.name;
      this.image = data.link;
      this._cardSelector = cardSelector; //  записали селектор в приватное поле
+     this._handleCardClick = handleCardClick;
   };
   _getTemplate() {
   // получаем разметку из HTML, клонируем элемент
@@ -40,11 +36,6 @@ export default class Card {
   };
 
   // скрытые слушатели
-  
-  _handleOpenPopup() {
-    popupPhoto.open(this.image, this.title);
-  };
-  
   _toogleLike() {
     this._like.classList.toggle('added');
   };
@@ -56,6 +47,6 @@ export default class Card {
   _setEventListeners() {
     this._like.addEventListener('click', () => this._toogleLike());
     this._remove.addEventListener('click', () => this._removeCard());
-    this._cardImage.addEventListener('click', () => this._handleOpenPopup());
+    this._cardImage.addEventListener('click', () => this._handleCardClick());
   };
 };
