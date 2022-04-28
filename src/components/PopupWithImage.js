@@ -3,7 +3,7 @@
     нужно вставлять в попап картинку и атрибут `src` изображения.*/
 
 import Popup from "./Popup.js";
- export default  class PopupWithImage extends Popup {
+export default  class PopupWithImage extends Popup {
 //переопределяем метод open
       open(image, title) {
           this._image = this._popup.querySelector('.popup__photo');

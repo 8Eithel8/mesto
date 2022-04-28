@@ -26,17 +26,17 @@ export default class Popup {
     };
 
 // приватный метод `_handleEscClose`, который содержит логику закрытия попапа клавишей Esc.
-   _handleEscClose(evt) {
+    _handleEscClose(evt) {
         if (evt.key === 'Escape') {
            this.close();
         }
-   };
+    };
 
    //публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа
-   setEventListeners() {
+    setEventListeners() {
        const closeButton = this._popup.querySelector('.popup__button_close');
        closeButton.addEventListener('click', () => this.close());
        this._popup.addEventListener('click', (evt) => this._closeOverlay(evt));
-   };
+    };
 };
 
