@@ -31,6 +31,15 @@ function addCard(container, data) {
     sectionCard.addItem(card.generateCard());
 };
 
+function editProfile() {
+    //объект userInfo, созданный из класса,
+    // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+    const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+    fieldName.value = name;
+    fieldInfo.value = info;
+    popupProfile.open();
+};
+
 function saveProfile() {
     userProfile.setUserInfo(fieldName.value, fieldInfo.value);
 };
@@ -57,6 +66,6 @@ popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
 popupProfile.setEventListeners();
 buttonAdd.addEventListener('click', () => popupAdd.open());
-buttonEdit.addEventListener('click', () => popupProfile.open());
+buttonEdit.addEventListener('click', () => editProfile());
 
 sectionCard.renderAll();
