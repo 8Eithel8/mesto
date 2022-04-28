@@ -12,7 +12,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
-const popupProfile = document.querySelector('.popup_type_profile');
+// const popupProfile = document.querySelector('.popup_type_profile');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const popupAddOld = document.querySelector('.popup_type_adder');
 const closeButtons = document.querySelectorAll('.popup__button_close');
@@ -20,7 +20,7 @@ const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
 // const profileTitle = document.querySelector('.profile__title');
 // const profileSubtitle = document.querySelector('.profile__subtitle');
-const profileForm = popupProfile.querySelector('.popup__form');
+// const profileForm = popupProfile.querySelector('.popup__form');
 const cardFormNew = popupAddOld.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
 // const popupPhoto = document.querySelector('.popup_type_photo');
@@ -40,7 +40,7 @@ export const settingsValidation = {
 };
 
 // создаем экземпляра валидаторв для каждой формы и проверяем
-const profileFormValidator = new FormValidator(settingsValidation, profileForm);
+// const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 // const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
@@ -57,20 +57,20 @@ function openPopup(popup) {
     document.addEventListener('keydown', closePopupByEsc);
 };
 
-function editProfile() {
-    profileFormValidator.resetForm();
-    //объект userInfo, созданный из класса,
-    // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
-    const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
-    fieldName.value = name;
-    fieldInfo.value = info;
-    openPopup(popupProfile);
-};
+// function editProfile() {
+//     // profileFormValidator.resetForm();
+//     //объект userInfo, созданный из класса,
+//     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+//     const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+//     fieldName.value = name;
+//     fieldInfo.value = info;
+//     openPopup(popupProfile);
+// };
 
-function saveProfile(evt) {
-    evt.preventDefault();
+function saveProfile() {
+    // evt.preventDefault();
     userProfile.setUserInfo(fieldName.value, fieldInfo.value);
-    closePopup(popupProfile);
+    // closePopup(popupProfile);
 };
 
 /*скорпировано*/
@@ -118,32 +118,35 @@ function closePopupByEsc(evt) {
 //   closePopup(popupAdd);
 // };
 
-function openPopupAdd() {
-    cardFormNew.reset();
-    adderFormValidator.disableSubmitButton();
-    adderFormValidator.resetForm();
-    openPopup(popupAdd);
-};
+// function openPopupAdd() {
+//     cardFormNew.reset();
+//     adderFormValidator.disableSubmitButton();
+//     adderFormValidator.resetForm();
+//     openPopup(popupAdd);
+// };
 
-popups.forEach(popup => popup.addEventListener('click', closeOverlay));
-document.addEventListener('keydown', closePopupByEsc);
+// popups.forEach(popup => popup.addEventListener('click', closeOverlay));
+// document.addEventListener('keydown', closePopupByEsc);
+//
+// closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
-closeButtons.forEach(button => button.addEventListener('click', closeForm));
 
-buttonEdit.addEventListener('click', editProfile);
 // buttonAdd.addEventListener('click', () => openPopupAdd());
-profileForm.addEventListener('submit', saveProfile);
-// cardFormNew.addEventListener('submit', submitCard);
-
-profileFormValidator.enableValidation();
+// profileForm.addEventListener('submit', saveProfile);
+// // cardFormNew.addEventListener('submit', submitCard);
+//
+// profileFormValidator.enableValidation();
 // adderFormValidator.enableValidation();
 
 export const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(cards, data));
+const popupProfile= new PopupWithForm('.popup_type_profile', () => saveProfile());
+
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
+popupProfile.setEventListeners();
 buttonAdd.addEventListener('click', () => popupAdd.open());
-
+buttonEdit.addEventListener('click', () => popupProfile.open());
 
 
 
