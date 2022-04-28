@@ -10,26 +10,26 @@ export default class Popup {
     //публичные методы `open` и `close`, которые отвечают за открытие и закрытие попапа
      open() {
          this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose);
+        document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
     };
 
     close() {
         this._popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose);
+        document.removeEventListener('keydown', (evt) => this._handleEscClose(evt));
     };
 
     // приватный метод закрывает попап по клику на оверлей.
     _closeOverlay(evt) {
         if (evt.currentTarget === evt.target) {
             this.close();
-        };
+        }
     };
 
 // приватный метод `_handleEscClose`, который содержит логику закрытия попапа клавишей Esc.
    _handleEscClose(evt) {
-        if (evt.key === "Escape") {
+        if (evt.key === 'Escape') {
            this.close();
-        };
+        }
    };
 
    //публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа
@@ -38,7 +38,5 @@ export default class Popup {
        closeButton.addEventListener('click', () => this.close());
        this._popup.addEventListener('click', (evt) => this._closeOverlay(evt));
    };
-
-
-}
+};
 

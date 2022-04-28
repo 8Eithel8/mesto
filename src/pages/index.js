@@ -24,7 +24,6 @@ const cardTemplate = '#card-template';
 
 
 const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
-console.log(userProfile);
 
 function addCard(container, data) {
     const card = new Card(data, cardTemplate, () => handleOpenPopup(card));
@@ -55,7 +54,6 @@ const popupProfile= new PopupWithForm('.popup_type_profile', () => saveProfile()
 const sectionCard = new Section({
     items: initialCards,
     renderer: (item) => {
-        console.log(item);
         const card = new Card(item, cardTemplate, () => handleOpenPopup(card));
         const cardElement = card.generateCard();
         sectionCard.addItem(cardElement);

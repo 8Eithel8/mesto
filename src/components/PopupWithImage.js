@@ -13,5 +13,4 @@ import Popup from "./Popup.js";
           this._image.alt = title;
           super.open(); //вызываем  метод из родительского класса
       };
-
-}
+};

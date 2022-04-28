@@ -10,13 +10,15 @@ export default class PopupWithForm extends Popup {
         this._handleSubmit = handleSubmit;
         this._form = this._popup.querySelector('.popup__form');
         this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
-    }
+    };
+
 //приватный метод собирает данные всех полей формы
     _getInputValues () {
         const values = {};
         this._inputList.forEach(input => values[input.name] = input.value);
         return values;
-    }
+    };
+
 //Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
 // добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
     setEventListeners() {
@@ -28,10 +30,11 @@ export default class PopupWithForm extends Popup {
         });
         this._validator = new FormValidator(settingsValidation, this._form);
         this._validator.enableValidation();
-    }
+    };
+
 //Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
         super.close();
       this._validator.reset();
-    }
+    };
 };

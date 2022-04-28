@@ -78,12 +78,14 @@ export default class FormValidator {
   // сбрасываем ошибки формы
   resetForm () {
     this._inputList.forEach(field => this._hideInputError(field));   
-  }
+  };
+
   reset () {
     this._formElement.reset();
     this.disableSubmitButton();
     this.resetForm();
-  }
+  };
+
   // уставнавливаем слушатели на поля и переключаем кнопку
   _setEventListeners () {
     this._toggleButtonState();

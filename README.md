@@ -12,7 +12,9 @@
 
 - адаптивной верстки,
 
-- JavaScript.
+- JavaScript,
+
+- сборка проекта с использованием webpack.
 
 https://8eithel8.github.io/mesto/  
 

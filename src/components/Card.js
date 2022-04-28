@@ -20,7 +20,6 @@ export default class Card {
     // сохраняем разметку в приватное поле _element  
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.card__image');
-    
     this._like = this._element.querySelector('.card__like');
     this._remove = this._element.querySelector('.card__remove');
     
