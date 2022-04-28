@@ -18,8 +18,8 @@ const popupAddOld = document.querySelector('.popup_type_adder');
 const closeButtons = document.querySelectorAll('.popup__button_close');
 const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
+// const profileTitle = document.querySelector('.profile__title');
+// const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileForm = popupProfile.querySelector('.popup__form');
 const cardFormNew = popupAddOld.querySelector('.popup__form');
 const cards = document.querySelector('.cards');
@@ -59,10 +59,20 @@ function openPopup(popup) {
 
 function editProfile() {
   profileFormValidator.resetForm();
-  fieldName.value = profileTitle.textContent;
-  fieldInfo.value = profileSubtitle.textContent;
+  //объект userInfo, созданный из класса,
+  // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+  const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+  fieldName.value = name;
+  fieldInfo.value = info;
   openPopup(popupProfile);
 };
+
+function saveProfile(evt) {
+  evt.preventDefault();
+  userProfile.setUserInfo(fieldName.value, fieldInfo.value);
+  closePopup(popupProfile);
+};
+
 /*скорпировано*/
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -93,12 +103,7 @@ function closePopupByEsc(evt) {
 //   openPopup(popupPhoto);
 // };
 
-function saveProfile(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = fieldName.value;
-  profileSubtitle.textContent = fieldInfo.value;
-  closePopup(popupProfile);
-};
+
 
 
 
