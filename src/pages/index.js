@@ -5,6 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import FormValidator from '../components/FormValidator.js';
 
 export const settingsValidation = {
     inputSelector: '.popup__field',
@@ -21,6 +22,16 @@ const fieldInfo = document.querySelector('#info');
 const cards = document.querySelector('.cards');
 const cardTemplate = '#card-template';
 
+const profileForm = document
+    .querySelector('.popup_type_profile')
+    .querySelector('.popup__form');
+const cardFormNew  = document
+    .querySelector('.popup_type_adder')
+    .querySelector('.popup__form');
+
+// создаем экземпляра валидаторв для каждой формы и проверяем
+const profileFormValidator = new FormValidator(settingsValidation, profileForm);
+const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 
 const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
@@ -59,6 +70,9 @@ const sectionCard = new Section({
         sectionCard.addItem(cardElement);
     }
 }, '.cards');
+
+profileFormValidator.enableValidation();
+adderFormValidator.enableValidation();
 
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();

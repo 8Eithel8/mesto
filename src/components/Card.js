@@ -1,4 +1,3 @@
-import { popupPhoto } from '../pages/index.js';
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
      this.title = data.name;

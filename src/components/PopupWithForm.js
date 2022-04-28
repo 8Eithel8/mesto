@@ -2,8 +2,6 @@
 - Кроме селектора попапа принимает в конструктор колбэк сабмита формы.*/
 
 import Popup from "./Popup.js";
-import {settingsValidation} from "../pages/index.js";
-import FormValidator from "./FormValidator.js";
 export default class PopupWithForm extends Popup {
     constructor(selector, handleSubmit) {
         super(selector);
@@ -28,13 +26,11 @@ export default class PopupWithForm extends Popup {
             this._handleSubmit(this._getInputValues());
             this.close();
         });
-        this._validator = new FormValidator(settingsValidation, this._form);
-        this._validator.enableValidation();
     };
 
 //Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
         super.close();
-      this._validator.reset();
+        this._form.reset();
     };
 };
