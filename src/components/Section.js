@@ -9,8 +9,8 @@
 
 У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.*/
 
-import { initialCards } from '../Utils/initialCards.js';
-import Card from './Card.js';
+// import { initialCards } from '../Utils/initialCards.js';
+// import Card from './Card.js';
 
 export default class Section  {
     constructor ({ items, renderer }, selector) {
@@ -19,16 +19,17 @@ export default class Section  {
         this._container = document.querySelector(selector);
     };
 
-    //публичный метод отвечает за отрисовку каждого отдельного элемента
-    renderer () {
+    //публичный метод отвечает за отрисовку всех элементов
+    renderAll () {
         this._renderedItems.forEach(item => {
+          //Отрисовка каждого отдельного элемента
             this._renderer(item);
         });
     };
 
     //убличный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
     addItem (element) {
-        this._container.append(element);
+        this._container.prepend(element);
     };
 
 };

@@ -3,10 +3,12 @@ import { initialCards } from '../Utils/initialCards.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Popup from "../components/Popup.js";
-import Section from "./Section.js";
+import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+
+
 
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
@@ -30,14 +32,14 @@ const popups = document.querySelectorAll('.popup');
 const cardTemplate = '#card-template';
 
 export const settingsValidation = {
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__button_submit',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__field_error',
-  errorClass: 'popup__error_visible'
+    inputSelector: '.popup__field',
+    submitButtonSelector: '.popup__button_submit',
+    inactiveButtonClass: 'popup__button_inactive',
+    inputErrorClass: 'popup__field_error',
+    errorClass: 'popup__error_visible'
 };
 
-// создаем экземпляра валидаторв для каждой формы и проверяем 
+// создаем экземпляра валидаторв для каждой формы и проверяем
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 // const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
@@ -45,60 +47,82 @@ const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subt
 console.log(userProfile);
 
 function addCard(container, data) {
-  const card = new Card(data, cardTemplate);
-  container.prepend(card.generateCard());
+    const card = new Card(data, cardTemplate);
+    sectionCard.addItem(card.generateCard());
 };
 
 /*скорпировано*/
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener('keydown', closePopupByEsc);
-// };
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
+};
 
-// function editProfile() {
-//   profileFormValidator.resetForm();
-//   //объект userInfo, созданный из класса,
-//   // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
-//   const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
-//   fieldName.value = name;
-//   fieldInfo.value = info;
-//   openPopup(popupProfile);
-// };
+function editProfile() {
+    profileFormValidator.resetForm();
+    //объект userInfo, созданный из класса,
+    // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+    const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+    fieldName.value = name;
+    fieldInfo.value = info;
+    openPopup(popupProfile);
+};
 
-// function saveProfile(evt) {
-//   evt.preventDefault();
-//   userProfile.setUserInfo(fieldName.value, fieldInfo.value);
-//   closePopup(popupProfile);
-// };
-//
-// /*скорпировано*/
-// function closePopup(popup) {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closePopupByEsc);
-// };
+function saveProfile(evt) {
+    evt.preventDefault();
+    userProfile.setUserInfo(fieldName.value, fieldInfo.value);
+    closePopup(popupProfile);
+};
+
+/*скорпировано*/
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc);
+};
 
 function closeForm(evt) {
-  closePopup(evt.target.closest('.popup'));
+    closePopup(evt.target.closest('.popup'));
 };
-// /*скорпировано*/
-// function closeOverlay(evt) {
-//   if (evt.currentTarget === evt.target) {
-//     closePopup(evt.target);
-//   };
+/*скорпировано*/
+function closeOverlay(evt) {
+    if (evt.currentTarget === evt.target) {
+        closePopup(evt.target);
+    };
+};
+/*скорпировано*/
+function closePopupByEsc(evt) {
+    if (evt.key === "Escape") {
+        const activePopup = document.querySelector('.popup_opened');
+        closePopup(activePopup);
+    };
+};
+
+// export function openPhoto(image, title) {
+//   imageFull.src = image;
+//   imageFullTitle.textContent = title;
+//   imageFull.alt = title;
+//   openPopup(popupPhoto);
 // };
-// /*скорпировано*/
-// function closePopupByEsc(evt) {
-//   if (evt.key === "Escape") {
-//     const activePopup = document.querySelector('.popup_opened');
-//     closePopup(activePopup);
-//   };
+
+
+
+
+
+// function submitCard(evt) {
+//   evt.preventDefault();
+//   const data = {
+//     name: inputPhotoName.value,
+//     link: inputPhotoLink.value
+//   }
+//   addCard(cards, data);
+//   cardFormNew.reset();
+//   closePopup(popupAdd);
 // };
 
 function openPopupAdd() {
-  cardFormNew.reset();
-  adderFormValidator.disableSubmitButton();
-  adderFormValidator.resetForm();
-  openPopup(popupAdd);
+    cardFormNew.reset();
+    adderFormValidator.disableSubmitButton();
+    adderFormValidator.resetForm();
+    openPopup(popupAdd);
 };
 
 popups.forEach(popup => popup.addEventListener('click', closeOverlay));
@@ -111,13 +135,10 @@ buttonEdit.addEventListener('click', editProfile);
 profileForm.addEventListener('submit', saveProfile);
 // cardFormNew.addEventListener('submit', submitCard);
 
-initialCards.forEach(item => addCard(cards, item));   
-
 profileFormValidator.enableValidation();
 // adderFormValidator.enableValidation();
 
 export const popupPhoto = new PopupWithImage('.popup_type_photo');
-//Для каждого попапа создаем свой экземпляр класса `PopupWithForm`.
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(cards, data));
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
@@ -127,10 +148,13 @@ buttonAdd.addEventListener('click', () => popupAdd.open());
 
 
 const sectionCard = new Section({
-    data: items,
+    items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, '.card');
+        console.log(item);
+        const card = new Card(item, cardTemplate);
         const cardElement = card.generateCard();
         sectionCard.addItem(cardElement);
     }
-}, cardListSelector);
+}, '.cards');
+
+sectionCard.renderAll();
