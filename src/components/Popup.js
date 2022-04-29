@@ -6,7 +6,7 @@ export default class Popup {
     constructor(selector) {
         this._popup = document.querySelector(selector); //  записали селектор в приватное поле
         this._closeButton = this._popup.querySelector('.popup__button_close');
-        this._handleEscClose.bind(this);
+        this._handleEscClose = this._handleEscClose.bind(this);
     };
 
     //публичные методы `open` и `close`, которые отвечают за открытие и закрытие попапа

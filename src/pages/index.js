@@ -27,9 +27,13 @@ const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
 
-function addCard(data) {
+function createCard(data) {
     const card = new Card(data, cardTemplate, () => handleOpenPopup(card));
-    sectionCard.addItem(card.generateCard());
+    return card.generateCard();
+}
+
+function addCard(data) {
+    sectionCard.addItem(createCard(data));
 };
 
 function editProfile() {
@@ -42,8 +46,8 @@ function editProfile() {
     popupProfile.open();
 };
 
-function saveProfile() {
-    userProfile.setUserInfo(popupProfile.getInputValues());
+function saveProfile(data) {
+    userProfile.setUserInfo(data);
 };
 
 function  handleOpenPopup({image, title}) {
@@ -57,7 +61,7 @@ function handleOpenPopupAdd() {
 
 const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
-const popupProfile = new PopupWithForm('.popup_type_profile', () => saveProfile());
+const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
 
 const sectionCard = new Section(
     {
