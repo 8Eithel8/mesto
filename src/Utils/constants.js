@@ -24,3 +24,11 @@
    link: 'https://sun9-2.userapi.com/s/v1/if2/IwcPYEUPF7CzienJxh_7jl-1d6GEyOt_Y36vDnEDIDHNYAM_r-7A0WOBmocNvMF6XYaT2ZjDHCv7VFnTzVySderv.jpg?size=2000x1350&quality=96&type=album'
  }
 ];
+
+ export const settingsValidation = {
+     inputSelector: '.popup__field',
+     submitButtonSelector: '.popup__button_submit',
+     inactiveButtonClass: 'popup__button_inactive',
+     inputErrorClass: 'popup__field_error',
+     errorClass: 'popup__error_visible'
+ };
