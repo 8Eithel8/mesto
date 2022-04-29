@@ -53,14 +53,13 @@ const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
 const popupProfile = new PopupWithForm('.popup_type_profile', () => saveProfile());
 
-const sectionCard = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const card = new Card(item, cardTemplate, () => handleOpenPopup(card));
-        const cardElement = card.generateCard();
-        sectionCard.addItem(cardElement);
-    }
-}, '.cards');
+const sectionCard = new Section(
+    {
+        items: initialCards,
+        renderer: addCard
+    },
+    '.cards'
+);
 
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
