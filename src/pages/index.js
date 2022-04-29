@@ -42,7 +42,7 @@ function editProfile() {
 };
 
 function saveProfile() {
-    userProfile.setUserInfo(fieldName.value, fieldInfo.value);
+    userProfile.setUserInfo(popupProfile.getInputValues());
 };
 
 function  handleOpenPopup({image, title}) {
@@ -51,7 +51,7 @@ function  handleOpenPopup({image, title}) {
 
 const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
-const popupProfile= new PopupWithForm('.popup_type_profile', () => saveProfile());
+const popupProfile = new PopupWithForm('.popup_type_profile', () => saveProfile());
 
 const sectionCard = new Section({
     items: initialCards,
