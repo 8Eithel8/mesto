@@ -35,6 +35,7 @@ function addCard(data) {
 function editProfile() {
     //объект userInfo, созданный из класса,
     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
+    profileFormValidator.reset();
     const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
     fieldName.value = name;
     fieldInfo.value = info;
@@ -48,6 +49,11 @@ function saveProfile() {
 function  handleOpenPopup({image, title}) {
     popupPhoto.open(image, title);
 };
+
+function handleOpenPopupAdd() {
+    adderFormValidator.reset();
+    popupAdd.open();
+}
 
 const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
@@ -67,7 +73,7 @@ adderFormValidator.enableValidation();
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
 popupProfile.setEventListeners();
-buttonAdd.addEventListener('click', () => popupAdd.open());
+buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
 buttonEdit.addEventListener('click', () => editProfile());
 
 sectionCard.renderAll();
