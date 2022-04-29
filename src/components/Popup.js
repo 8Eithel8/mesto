@@ -5,17 +5,19 @@
 export default class Popup {
     constructor(selector) {
         this._popup = document.querySelector(selector); //  записали селектор в приватное поле
+        this._closeButton = this._popup.querySelector('.popup__button_close');
+        this._handleEscClose.bind(this);
     };
 
     //публичные методы `open` и `close`, которые отвечают за открытие и закрытие попапа
      open() {
          this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
+        document.addEventListener('keydown', this._handleEscClose);
     };
 
     close() {
         this._popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', (evt) => this._handleEscClose(evt));
+        document.removeEventListener('keydown', this._handleEscClose);
     };
 
     // приватный метод закрывает попап по клику на оверлей.
@@ -34,8 +36,7 @@ export default class Popup {
 
    //публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа
     setEventListeners() {
-       const closeButton = this._popup.querySelector('.popup__button_close');
-       closeButton.addEventListener('click', () => this.close());
+       this._closeButton.addEventListener('click', () => this.close());
        this._popup.addEventListener('click', (evt) => this._closeOverlay(evt));
     };
 };
