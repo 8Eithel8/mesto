@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/8Eithel8/mesto#readme",
   "dependencies": {
-    "core-js": "^3.22.2"
+    "core-js": "^3.22.2",
+    "gh-pages": "^3.2.3"
   }
 }
