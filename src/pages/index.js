@@ -11,6 +11,8 @@ const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const fieldName = document.querySelector('#name');
 const fieldInfo = document.querySelector('#info');
+
+
 const cardTemplate = '#card-template';
 
 const profileForm = document
@@ -59,6 +61,7 @@ function handleOpenPopupAdd() {
     popupAdd.open();
 }
 
+
 const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
@@ -77,7 +80,35 @@ adderFormValidator.enableValidation();
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
 popupProfile.setEventListeners();
+
 buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
 buttonEdit.addEventListener('click', () => editProfile());
 
 sectionCard.renderAll();
+
+
+//работает форма с аватаркой
+const profileAvatar = document.querySelector('.profile-wrapper-avatar');
+const profileAvatarField = document.querySelector('.profile__avatar');
+const fieldAvatarLink = document.querySelector('#avatar-link');
+const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar());
+
+const avatarFormNew  = document
+    .querySelector('.popup_type_editAvatar')
+    .querySelector('.popup__form');
+
+const avatarFormValidator = new FormValidator(settingsValidation, avatarFormNew);
+avatarFormValidator.enableValidation();
+
+
+function handleOpenPopupAvatar() {
+    avatarFormValidator.reset();
+    popupAvatar.open();
+}
+
+function saveAvatar() {
+    profileAvatarField.src = fieldAvatarLink.value;
+}
+
+popupAvatar.setEventListeners();
+profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
