@@ -6,7 +6,7 @@
 // Вместо `cardId` в URL нужно подставить параметр `_id` карточки, которую нужно удалить.
 // `_id` каждой карточки есть в её JSON:
 //
-//
+//добавить 2 параметра в конструктор,  на клик по лайку и по корзинке
 
 
 export default class Card {
@@ -45,6 +45,7 @@ export default class Card {
     };
 
   // скрытые слушатели
+    //TODO изменить под новые задачи
   _toogleLike() {
     this._like.classList.toggle('added');
   };
@@ -53,6 +54,7 @@ export default class Card {
     this._element.remove();
   };
 
+  //TODO заменить remove и handlercard click на те, что будут в конструкторе
   _setEventListeners() {
     this._like.addEventListener('click', () => this._toogleLike());
     this._remove.addEventListener('click', () => this._removeCard());

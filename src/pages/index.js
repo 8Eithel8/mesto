@@ -6,6 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import FormValidator from '../components/FormValidator.js';
+// import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
@@ -29,6 +30,7 @@ const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
 
+//TODO добавить хендлеры для обработки клина на  лайк и корзинку
 function createCard(data) {
     const card = new Card(data, cardTemplate, () => handleOpenPopup(card));
     return card.generateCard();
