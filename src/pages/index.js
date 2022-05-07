@@ -112,3 +112,18 @@ function saveAvatar() {
 
 popupAvatar.setEventListeners();
 profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
+
+//работает всплывает попап удаления
+const buttonRemove = document.querySelector('.card__remove');
+const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => changeTextConfirm());
+
+function handleOpenPopupConfirm() {
+    popupConfirm.open();
+}
+
+function changeTextConfirm() {
+    buttonRemove.textContent = 'Сохранение...';
+}
+
+popupConfirm.setEventListeners();
+buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
