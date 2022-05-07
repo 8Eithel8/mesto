@@ -8,5 +8,17 @@ export default class PopupWithConfirm extends Popup {
         super(selector);
         this._handleSubmit = handleSubmit;
         this._form = this._popup.querySelector('.popup__form');
-        this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
+
     };
+
+    //Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
+// добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
+    setEventListeners() {
+        super.setEventListeners();
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._handleSubmit();
+            this.close();
+        });
+    };
+}

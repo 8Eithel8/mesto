@@ -6,7 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import FormValidator from '../components/FormValidator.js';
-// import PopupWithConfirm from "../components/PopupWithConfirm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
@@ -117,15 +117,15 @@ profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
 
 //работает всплывает попап удаления
 const buttonRemove = document.querySelector('.card__remove');
-const popupConfirm = new PopupWithForm('.popup_type_confirm', (data) => changeTextConfirm());
+const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (data) => data);
 
 function handleOpenPopupConfirm() {
     popupConfirm.open();
 }
-
-function changeTextConfirm() {
-    buttonRemove.textContent = 'Сохранение...';
-}
+//
+// function changeTextConfirm() {
+//     buttonRemove.textContent = 'Сохранение...';
+// }
 
 popupConfirm.setEventListeners();
 buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
