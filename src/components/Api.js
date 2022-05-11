@@ -48,7 +48,11 @@ class Api {
     editUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
-            headers: this._headers
+            headers: this._headers,
+            body: JSON.stringify({
+                name,
+                about
+            })
         })
             .then(this._checkRes)
     }
