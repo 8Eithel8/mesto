@@ -21,7 +21,7 @@
  },
  {
    name: 'Черное озеро',
-   link: 'https://sun9-2.userapi.com/s/v1/if2/IwcPYEUPF7CzienJxh_7jl-1d6GEyOt_Y36vDnEDIDHNYAM_r-7A0WOBmocNvMF6XYaT2ZjDHCv7VFnTzVySderv.jpg?size=2000x1350&quality=96&type=album'
+   link: 'https://sun9-85.userapi.com/s/v1/if2/bwpwwmt3pDWYERrGKH38zlRhaBIdAb8UKiGpdtTnR9MY9b2-GCTbH3cefq7rGAFsb_ntyPaotOcHU0GblF7etxdE.jpg?size=2000x1333&quality=95&type=album'
  }
 ];
 
