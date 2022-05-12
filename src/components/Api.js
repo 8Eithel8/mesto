@@ -24,7 +24,7 @@ export default class Api {
     }
 
     //добавляем аватар
-    addAvatar(avatar) {
+    updateAvatar({avatar}) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
@@ -45,7 +45,7 @@ export default class Api {
     }
 
     //изменяем инфу о пользователе
-    editUserInfo(name, about) {
+    editUserInfo({name, about}) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,

@@ -29,7 +29,11 @@ const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 
-const userProfile = new UserInfo({name: '.profile__title', about: '.profile__subtitle'});
+const userProfile = new UserInfo({
+    name: '.profile__title',
+    about: '.profile__subtitle',
+    avatar: '.profile__avatar'
+});
 
 //TODO добавить хендлеры для обработки клина на  лайк и корзинку
 function createCard(data) {
@@ -46,16 +50,18 @@ function editProfile() {
     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
     profileFormValidator.reset();
     const { name, about } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
-    console.log(name, about);
-    console.log(fieldName.value);
-    console.log(fieldAbout.value);
+
     fieldName.value = name;
     fieldAbout.value = about;
     popupProfile.open();
 };
 
 function saveProfile(data) {
-    userProfile.setUserInfo(data);
+    api.editUserInfo(data)
+        .then(() => userProfile.setUserInfo(data))
+        .catch(err => {
+            console.log('Error: ', err);
+        });
 };
 
 function  handleOpenPopup({image, title}) {
@@ -123,7 +129,9 @@ function handleOpenPopupAvatar() {
 }
 
 function saveAvatar() {
-    profileAvatarField.src = fieldAvatarLink.value;
+    const data = {avatar: fieldAvatarLink.value};
+
+    userProfile.setAvatarUrl(data);
 }
 
 popupAvatar.setEventListeners();
@@ -144,5 +152,9 @@ function handleOpenPopupConfirm() {
 popupConfirm.setEventListeners();
 buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
 
-
-    // userProfile.setUserInfo(api.getUserInfo());
+//берем данные с сервера и заталкиваем их в разметку через экземпляр класса UserInfo
+api.getUserInfo() //возвращает ответ ввиде Response, далее даем инструкцию ввиде then, в случае удачи
+    .then(function (userInfo){
+    userProfile.setUserInfo(userInfo);
+    userProfile.setAvatarUrl(userInfo);
+});
