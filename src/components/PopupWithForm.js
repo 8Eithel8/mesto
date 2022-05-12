@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
         super(selector);
         this._handleSubmit = handleSubmit;
         this._form = this._popup.querySelector('.popup__form');
+        this._buttonSubmit = this._form.querySelector('.popup__button_submit');
         this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
     };
 
@@ -17,14 +18,22 @@ export default class PopupWithForm extends Popup {
         return values;
     };
 
+    _toogleSubmitText (isloading) {
+        if (isloading) {
+            this._buttonSubmit.textContent = 'Сохранение...';
+        } else {
+            this._buttonSubmit.textContent = 'Сохранить';
+        }
+    }
+
 //Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
 // добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
+            this._toogleSubmitText(true);
             this._handleSubmit(this._getInputValues());
-            this.close();
         });
     };
 
@@ -32,5 +41,6 @@ export default class PopupWithForm extends Popup {
     close() {
         super.close();
         this._form.reset();
+        this._toogleSubmitText(false);
     };
 };

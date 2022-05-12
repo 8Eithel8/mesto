@@ -1,5 +1,5 @@
 import './index.css';
-import { initialCards, settingsValidation } from '../Utils/constants.js';
+import { settingsValidation } from '../Utils/constants.js';
 import Card from '../components/Card.js';
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -63,7 +63,8 @@ function errorHandler(err) {
 function saveProfile(data) {
     api.editUserInfo(data)
         .then(() => userProfile.setUserInfo(data))
-        .catch(errorHandler);
+        .catch(errorHandler)
+        .finally(() => popupProfile.close())
 };
 
 function  handleOpenPopup({image, title}) {
@@ -76,9 +77,23 @@ function handleOpenPopupAdd() {
 }
 
 
+const  api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+    headers: {
+        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
+        'Content-Type': 'application/json'
+    }
+});
 const popupPhoto = new PopupWithImage('.popup_type_photo');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
+
+
+
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
+
+let initialCards = [];
+api.getInitialCards()
+    .then(cards => cards.forEach((card) => addCard(card)));
 
 const sectionCard = new Section(
     {
@@ -87,13 +102,6 @@ const sectionCard = new Section(
     },
     '.cards'
 );
-const  api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
-    headers: {
-        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
-        'Content-Type': 'application/json'
-    }
-});
 
 console.log(api.getInitialCards());
 console.log(api.getUserInfo());
@@ -133,26 +141,27 @@ function handleOpenPopupAvatar() {
 function saveAvatar(data) {
     api.updateAvatar(data)
         .then(() => userProfile.setAvatarUrl(data))
-        .catch(errorHandler);
+        .catch(errorHandler)
+        .finally(() => popupAvatar.close())
 }
 
 popupAvatar.setEventListeners();
 profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
 
 //работает всплывает попап удаления
-const buttonRemove = document.querySelector('.card__remove');
-const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (data) => data);
-
-function handleOpenPopupConfirm() {
-    popupConfirm.open();
-}
+// const buttonRemove = document.querySelector('.card__remove');
+// const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (data) => data);
+//
+// function handleOpenPopupConfirm() {
+//     popupConfirm.open();
+//}
 //
 // function changeTextConfirm() {
 //     buttonRemove.textContent = 'Сохранение...';
 // }
 
-popupConfirm.setEventListeners();
-buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
+// popupConfirm.setEventListeners();
+// buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
 
 //берем данные с сервера и заталкиваем их в разметку через экземпляр класса UserInfo
 api.getUserInfo() //возвращает ответ ввиде Response, далее даем инструкцию ввиде then, в случае удачи
