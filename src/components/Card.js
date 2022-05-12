@@ -10,11 +10,16 @@
 
 
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, userId, cardSelector, handleCardClick) {
        this.title = data.name;
        this.image = data.link;
+       this._likes = data.likes;
+       this._ownerId = data.owner._id;
+       this._userId = userId;
+       this._id = data._id;
        this._cardSelector = cardSelector; //  записали селектор в приватное поле
        this._handleCardClick = handleCardClick;
+
     };
     _getTemplate() {
     // получаем разметку из HTML, клонируем элемент
@@ -26,12 +31,17 @@ export default class Card {
           .cloneNode(true);
     };
 
+
+
     generateCard() {
       // сохраняем разметку в приватное поле _element
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector('.card__image');
         this._like = this._element.querySelector('.card__like');
         this._remove = this._element.querySelector('.card__remove');
+        if (this._ownerId !== this._userId) {
+            this._remove.style.display = "none";
+        }
 
         this._setEventListeners();
 

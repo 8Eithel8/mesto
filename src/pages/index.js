@@ -36,13 +36,13 @@ const userProfile = new UserInfo({
 });
 
 //TODO добавить хендлеры для обработки клина на  лайк и корзинку
-function createCard(data) {
-    const card = new Card(data, cardTemplate, () => handleOpenPopup(card));
+function createCard(data, userId) {
+    const card = new Card(data, userId, cardTemplate, () => handleOpenPopup(card));
     return card.generateCard();
 }
 
-function addCard(data) {
-    sectionCard.addItem(createCard(data));
+function addCard(data, userId) {
+    sectionCard.addItem(createCard(data, userId));
 };
 
 function editProfile() {
@@ -91,21 +91,6 @@ const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data))
 
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
 
-let initialCards = [];
-api.getInitialCards()
-    .then(cards => cards.forEach((card) => addCard(card)));
-
-const sectionCard = new Section(
-    {
-        items: initialCards,
-        renderer: addCard
-    },
-    '.cards'
-);
-
-console.log(api.getInitialCards());
-console.log(api.getUserInfo());
-
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
 
@@ -116,7 +101,7 @@ popupProfile.setEventListeners();
 buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
 buttonEdit.addEventListener('click', () => editProfile());
 
-sectionCard.renderAll();
+
 
 
 //работает форма с аватаркой
@@ -164,8 +149,32 @@ profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
 // buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
 
 //берем данные с сервера и заталкиваем их в разметку через экземпляр класса UserInfo
-api.getUserInfo() //возвращает ответ ввиде Response, далее даем инструкцию ввиде then, в случае удачи
-    .then(function (userInfo){
-    userProfile.setUserInfo(userInfo);
-    userProfile.setAvatarUrl(userInfo);
-});
+// api.getUserInfo() //возвращает ответ ввиде Response, далее даем инструкцию ввиде then, в случае удачи
+//     .then(function (userInfo){
+//     userProfile.setUserInfo(userInfo);
+//     userProfile.setAvatarUrl(userInfo);
+// });
+//
+//
+//
+// api.getInitialCards()
+//     .then(cards => cards.forEach((card) => addCard(card)));
+
+const sectionCard = new Section(
+    {
+        items: [],
+        renderer: addCard
+    },
+    '.cards'
+);
+
+console.log(api.getInitialCards());
+api.getInitialCards() .then(arr => console.log(arr[0]._id));
+console.log(api.getUserInfo());
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+    .then(([cards, userInfo]) => {
+        userProfile.setUserInfo(userInfo);
+        userProfile.setAvatarUrl(userInfo);
+        cards.forEach((card) => addCard(card, userInfo._id))
+    });
