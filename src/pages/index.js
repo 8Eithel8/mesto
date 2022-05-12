@@ -56,12 +56,14 @@ function editProfile() {
     popupProfile.open();
 };
 
+function errorHandler(err) {
+    console.log('Error: ', err)
+};
+
 function saveProfile(data) {
     api.editUserInfo(data)
         .then(() => userProfile.setUserInfo(data))
-        .catch(err => {
-            console.log('Error: ', err);
-        });
+        .catch(errorHandler);
 };
 
 function  handleOpenPopup({image, title}) {
@@ -112,8 +114,8 @@ sectionCard.renderAll();
 //работает форма с аватаркой
 const profileAvatar = document.querySelector('.profile-wrapper-avatar');
 const profileAvatarField = document.querySelector('.profile__avatar');
-const fieldAvatarLink = document.querySelector('#avatar-link');
-const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar());
+const fieldAvatarLink = document.querySelector('#avatar');
+const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar(data));
 
 const avatarFormNew  = document
     .querySelector('.popup_type_editAvatar')
@@ -127,11 +129,11 @@ function handleOpenPopupAvatar() {
     avatarFormValidator.reset();
     popupAvatar.open();
 }
-
-function saveAvatar() {
-    const data = {avatar: fieldAvatarLink.value};
-
-    userProfile.setAvatarUrl(data);
+//сохраняем аватар
+function saveAvatar(data) {
+    api.updateAvatar(data)
+        .then(() => userProfile.setAvatarUrl(data))
+        .catch(errorHandler);
 }
 
 popupAvatar.setEventListeners();
