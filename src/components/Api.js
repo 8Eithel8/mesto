@@ -1,6 +1,6 @@
 // TODO: Для работы с API создайте класс Api. Все запросы должны быть методами этого класса:
 
-class Api {
+export default class Api {
     constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;
         this._headers = headers;
@@ -45,7 +45,7 @@ class Api {
     }
 
     //изменяем инфу о пользователе
-    editUserInfo() {
+    editUserInfo(name, about) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
@@ -94,14 +94,6 @@ class Api {
             .then(this._checkRes)
     }
 }
-
-export const  api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
-    headers: {
-        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
-        'Content-Type': 'application/json'
-    }
-});
 
 
 

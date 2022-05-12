@@ -19,7 +19,7 @@
         <div class="profile-wrapper-avatar">
           <div class="profile__avatar-edit"></div>
           <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватарка">
-        </div>
+        </div> 
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__button profile__button_type_edit" type="button" aria-label="Редактировать"></button>
@@ -41,9 +41,9 @@
               <input class="popup__field" type="text" name="name" id="name" value="Жак-Ив Кусто" required minlength="2" maxlength="40">
               <span class="popup__error name-error"></span>
             </label>
-            <label class="popup__label-field" for="info">
-              <input class="popup__field" type="text" name="info" id="info" value="Исследователь океана" required minlength="2" maxlength="200">
-              <span class="popup__error info-error"></span>
+            <label class="popup__label-field" for="about">
+              <input class="popup__field" type="text" name="about" id="about" value="Исследователь океана" required minlength="2" maxlength="200">
+              <span class="popup__error about-error"></span>
             </label>
             <button  type="submit" class="popup__button popup__button_submit" disabled>Сохранить</button>            
           </form>  
@@ -120,8 +120,6 @@
       <p class="footer__copyright">&copy; 2022 Анастасия Улитина</p>
     </footer>
 
-
-<!--    <script type="module" src="pages/index.js"></script>-->
   </body>
 
 </html>

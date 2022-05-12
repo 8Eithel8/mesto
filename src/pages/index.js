@@ -7,11 +7,12 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import FormValidator from '../components/FormValidator.js';
 import PopupWithConfirm from "../components/PopupWithConfirm.js";
+import Api from "../components/Api.js";
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const fieldName = document.querySelector('#name');
-const fieldInfo = document.querySelector('#info');
+const fieldAbout = document.querySelector('#about');
 
 
 const cardTemplate = '#card-template';
@@ -28,7 +29,7 @@ const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 
-const userProfile = new UserInfo({name: '.profile__title', info: '.profile__subtitle'});
+const userProfile = new UserInfo({name: '.profile__title', about: '.profile__subtitle'});
 
 //TODO добавить хендлеры для обработки клина на  лайк и корзинку
 function createCard(data) {
@@ -44,9 +45,12 @@ function editProfile() {
     //объект userInfo, созданный из класса,
     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
     profileFormValidator.reset();
-    const { name, info } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+    const { name, about } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
+    console.log(name, about);
+    console.log(fieldName.value);
+    console.log(fieldAbout.value);
     fieldName.value = name;
-    fieldInfo.value = info;
+    fieldAbout.value = about;
     popupProfile.open();
 };
 
@@ -75,6 +79,16 @@ const sectionCard = new Section(
     },
     '.cards'
 );
+const  api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+    headers: {
+        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
+        'Content-Type': 'application/json'
+    }
+});
+
+console.log(api.getInitialCards());
+console.log(api.getUserInfo());
 
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
@@ -129,3 +143,6 @@ function handleOpenPopupConfirm() {
 
 popupConfirm.setEventListeners();
 buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
+
+
+    // userProfile.setUserInfo(api.getUserInfo());

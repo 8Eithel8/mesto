@@ -1,12 +1,12 @@
-/* Класс `UserInfo` отвечает за управление отображением информации о пользователе на странице. Этот класс:
+/* Класс `Userabout` отвечает за управление отображением информации о пользователе на странице. Этот класс:
 
 - Принимает в конструктор объект с селекторами двух элементов:
     элемента имени пользователя и элемента информации о себе.*/
 
 export default class UserInfo {
-   constructor({name, info}) {
+   constructor({name, about}) {
        this._name = document.querySelector(name);
-       this._info = document.querySelector(info);
+       this._about = document.querySelector(about);
    };
 
         //возвращает объект с данными пользователя.
@@ -14,13 +14,13 @@ export default class UserInfo {
    getUserInfo () {
        return {
             name: this._name.textContent,
-            info: this._info.textContent
+            about: this._about.textContent
        };
    };
 
       //принимает новые данные пользователя и добавляет их на страницу.
-   setUserInfo ({name, info}) {
+   setUserInfo ({name, about}) {
        this._name.textContent = name;
-       this._info.textContent = info;
+       this._about.textContent = about;
    };
  };
