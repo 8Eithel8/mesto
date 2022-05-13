@@ -772,6 +772,8 @@ template {
   max-width: 282px;
   margin: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .card__image {
   width: 282px;
@@ -781,6 +783,7 @@ template {
   margin: 0;
   padding: 0;
   object-fit: cover;
+  font-size: 14px;
 }
 
 .card__image:hover {
@@ -809,10 +812,12 @@ template {
 .card__footer {
   display: flex;
   max-width: 282px;
+  height: 76px;
+  box-sizing: border-box;
   background-color: white;
   color: black;
   margin: 0;
-  padding: 25px 20px 17px 21px;
+  padding: 0 20px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   justify-content: space-between;
@@ -829,14 +834,14 @@ template {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding: 25px 0 17px 0;
 }
 .card__like-wrapper {
     display: flex;
     flex-direction: column;
+    padding-top: 23px;
 }
 .card__like-counter {
-    /*width: 10px;*/
-    /*height: 16px;*/
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
