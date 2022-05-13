@@ -1,6 +1,6 @@
 //Попап, запрашивающий подтверждение действия
 import Popup from "./Popup.js";
-export default class PopupWithConfirm extends Popup {
+export default class PopupWithConfirmation extends Popup {
     constructor(selector, handleSubmit) {
         super(selector);
         this._handleSubmit = handleSubmit;

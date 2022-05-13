@@ -4,19 +4,10 @@
 У класса `Section` нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.*/
 
 export default class Section  {
-    constructor ({ items, renderer }, selector) {
-        this._renderedItems = items;
-        this._renderer = renderer;
+    constructor (selector) {
         this._container = document.querySelector(selector);
     };
 
-    //публичный метод отвечает за отрисовку всех элементов
-    renderAll () {
-        this._renderedItems.forEach(item => {
-          //Отрисовка каждого отдельного элемента
-            this._renderer(item);
-        });
-    };
 
     //убличный метод `addItem`, который принимает DOM-элемент и добавляет его в контейнер
     addItem (element) {

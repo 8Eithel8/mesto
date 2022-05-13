@@ -6,7 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import FormValidator from '../components/FormValidator.js';
-import PopupWithConfirm from "../components/PopupWithConfirm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Api from "../components/Api.js";
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
@@ -39,7 +39,7 @@ const userProfile = new UserInfo({
     avatar: '.profile__avatar'
 });
 
-const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (card) => {
+const popupConfirm = new PopupWithConfirmation('.popup_type_confirm', (card) => {
     api.removeCard(card.id)
         .then(() => card.removeCard())
         .catch(errorHandler);
@@ -58,13 +58,7 @@ const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAv
 
 const avatarFormValidator = new FormValidator(settingsValidation, avatarFormNew);
 
-const sectionCard = new Section(
-    {
-        items: [],
-        renderer: addCard
-    },
-    '.cards'
-);
+const sectionCard = new Section('.cards');
 
 // в параметр data прилетает объект из PopupWithForm
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
