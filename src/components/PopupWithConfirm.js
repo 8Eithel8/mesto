@@ -11,13 +11,18 @@ export default class PopupWithConfirm extends Popup {
 
     };
 
+    open(card) {
+        super.open();
+        this._card = card;
+    }
+
     //Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
 // добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._handleSubmit();
+            this._handleSubmit(this._card);
             this.close();
         });
     };

@@ -13,8 +13,8 @@ const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const fieldName = document.querySelector('#name');
 const fieldAbout = document.querySelector('#about');
-let userId;
 
+let userId;
 
 const cardTemplate = '#card-template';
 
@@ -36,6 +36,13 @@ const userProfile = new UserInfo({
     avatar: '.profile__avatar'
 });
 
+const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (card) => {
+    api.removeCard(card.id)
+        .then(() => card.removeCard())
+        .catch(errorHandler);
+});
+
+popupConfirm.setEventListeners();
 
 //TODO добавить хендлеры для обработки клина на  лайк и корзинку
 function createCard(data, userId) {
@@ -44,11 +51,7 @@ function createCard(data, userId) {
         userId,
         cardTemplate,
         () => handleOpenPopup(card),
-        (id) => {
-            api.removeCard(id)
-                .then(() => card.removeCard())
-                .catch(errorHandler);
-        }
+        () => popupConfirm.open(card)
     );
     return card.generateCard();
 }

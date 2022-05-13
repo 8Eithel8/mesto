@@ -16,7 +16,7 @@ export default class Card {
        this._likes = data.likes;
        this._ownerId = data.owner._id;
        this._userId = userId;
-       this._id = data._id;
+       this.id = data._id;
        this._cardSelector = cardSelector; //  записали селектор в приватное поле
        this._handleCardClick = handleCardClick;
        this._handleCardRemove = handleCardRemove;
@@ -67,7 +67,7 @@ export default class Card {
   //TODO заменить remove и handlercard click на те, что будут в конструкторе
   _setEventListeners() {
     this._like.addEventListener('click', () => this._toogleLike());
-    this._remove.addEventListener('click', () => this._handleCardRemove(this._id));
+    this._remove.addEventListener('click', () => this._handleCardRemove(this.id));
     this._cardImage.addEventListener('click', () => this._handleCardClick());
   };
 };
