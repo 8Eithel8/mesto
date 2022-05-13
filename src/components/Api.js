@@ -58,7 +58,7 @@ export default class Api {
     }
 
     //постим новую фотографию
-    postNewCard(name, link) {
+    postNewCard({name, link}) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,

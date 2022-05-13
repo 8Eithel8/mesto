@@ -13,6 +13,7 @@ const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const fieldName = document.querySelector('#name');
 const fieldAbout = document.querySelector('#about');
+let userId;
 
 
 const cardTemplate = '#card-template';
@@ -85,7 +86,16 @@ const  api = new Api({
     }
 });
 const popupPhoto = new PopupWithImage('.popup_type_photo');
-const popupAdd = new PopupWithForm('.popup_type_adder', (data) => addCard(data));
+
+// в параметр data прилетает объект из PopupWithForm
+const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
+    api.postNewCard(data)
+        .then(res => {
+            addCard(res, userId)
+        })
+        .catch(errorHandler)
+        .finally(() => popupAdd.close())
+});
 
 
 
@@ -174,6 +184,7 @@ console.log(api.getUserInfo());
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([cards, userInfo]) => {
+        userId = userInfo._id;
         userProfile.setUserInfo(userInfo);
         userProfile.setAvatarUrl(userInfo);
         cards.forEach((card) => addCard(card, userInfo._id))
