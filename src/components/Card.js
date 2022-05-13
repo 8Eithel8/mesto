@@ -10,7 +10,7 @@
 
 
 export default class Card {
-    constructor(data, userId, cardSelector, handleCardClick) {
+    constructor(data, userId, cardSelector, handleCardClick, handleCardRemove) {
        this.title = data.name;
        this.image = data.link;
        this._likes = data.likes;
@@ -19,7 +19,7 @@ export default class Card {
        this._id = data._id;
        this._cardSelector = cardSelector; //  записали селектор в приватное поле
        this._handleCardClick = handleCardClick;
-
+       this._handleCardRemove = handleCardRemove;
     };
     _getTemplate() {
     // получаем разметку из HTML, клонируем элемент
@@ -60,14 +60,14 @@ export default class Card {
     this._like.classList.toggle('added');
   };
 
-  _removeCard() {
+  removeCard() {
     this._element.remove();
   };
 
   //TODO заменить remove и handlercard click на те, что будут в конструкторе
   _setEventListeners() {
     this._like.addEventListener('click', () => this._toogleLike());
-    this._remove.addEventListener('click', () => this._removeCard());
+    this._remove.addEventListener('click', () => this._handleCardRemove(this._id));
     this._cardImage.addEventListener('click', () => this._handleCardClick());
   };
 };

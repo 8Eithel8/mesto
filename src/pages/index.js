@@ -36,9 +36,20 @@ const userProfile = new UserInfo({
     avatar: '.profile__avatar'
 });
 
+
 //TODO добавить хендлеры для обработки клина на  лайк и корзинку
 function createCard(data, userId) {
-    const card = new Card(data, userId, cardTemplate, () => handleOpenPopup(card));
+    const card = new Card(
+        data,
+        userId,
+        cardTemplate,
+        () => handleOpenPopup(card),
+        (id) => {
+            api.removeCard(id)
+                .then(() => card.removeCard())
+                .catch(errorHandler);
+        }
+    );
     return card.generateCard();
 }
 
