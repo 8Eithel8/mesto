@@ -137,8 +137,6 @@ buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
 buttonEdit.addEventListener('click', () => editProfile());
 
 
-
-
 //работает форма с аватаркой
 const profileAvatar = document.querySelector('.profile-wrapper-avatar');
 const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar(data));
