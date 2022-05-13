@@ -41,7 +41,10 @@ const userProfile = new UserInfo({
 
 const popupConfirm = new PopupWithConfirmation('.popup_type_confirm', (card) => {
     api.removeCard(card.id)
-        .then(() => card.removeCard())
+        .then(() => {
+            card.removeCard()
+            popupConfirm.close();
+        })
         .catch(errorHandler);
 });
 
@@ -64,10 +67,10 @@ const sectionCard = new Section('.cards');
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
     api.postNewCard(data)
         .then(res => {
-            addCard(res, userId)
+            addCard(res, userId);
+            popupAdd.close();
         })
         .catch(errorHandler)
-        .finally(() => popupAdd.close())
 });
 
 const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
@@ -118,9 +121,11 @@ function errorHandler(err) {
 
 function saveProfile(data) {
     api.editUserInfo(data)
-        .then(() => userProfile.setUserInfo(data))
+        .then(() => {
+            userProfile.setUserInfo(data);
+            popupProfile.close();
+        })
         .catch(errorHandler)
-        .finally(() => popupProfile.close())
 };
 
 function handleOpenPopupAvatar() {
@@ -130,10 +135,12 @@ function handleOpenPopupAvatar() {
 //сохраняем аватар
 function saveAvatar(data) {
     api.updateAvatar(data)
-        .then(() => userProfile.setAvatarUrl(data))
+        .then(() => {
+            userProfile.setAvatarUrl(data);
+            popupAvatar.close();
+        })
         .catch(errorHandler)
-        .finally(() => popupAvatar.close())
-}
+};
 
 function  handleOpenPopup({image, title}) {
     popupPhoto.open(image, title);
@@ -142,7 +149,7 @@ function  handleOpenPopup({image, title}) {
 function handleOpenPopupAdd() {
     adderFormValidator.reset();
     popupAdd.open();
-}
+};
 
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
