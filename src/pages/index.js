@@ -25,7 +25,7 @@ const cardFormNew  = document
     .querySelector('.popup_type_adder')
     .querySelector('.popup__form');
 
-// создаем экземпляра валидаторв для каждой формы и проверяем
+// создаем экземпляры классов
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);
 const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
@@ -42,9 +42,29 @@ const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (card) => {
         .catch(errorHandler);
 });
 
-popupConfirm.setEventListeners();
+const  api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+    headers: {
+        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
+        'Content-Type': 'application/json'
+    }
+});
+const popupPhoto = new PopupWithImage('.popup_type_photo');
 
-//TODO добавить хендлеры для обработки клина на  лайк и корзинку
+// в параметр data прилетает объект из PopupWithForm
+const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
+    api.postNewCard(data)
+        .then(res => {
+            addCard(res, userId)
+        })
+        .catch(errorHandler)
+        .finally(() => popupAdd.close())
+});
+
+const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
+
+
+
 function createCard(data, userId) {
     const card = new Card(
         data,
@@ -66,23 +86,24 @@ function createCard(data, userId) {
         }
     );
     return card.generateCard();
-}
 
+}
 function addCard(data, userId) {
     sectionCard.addItem(createCard(data, userId));
-};
 
+};
 function editProfile() {
     //объект userInfo, созданный из класса,
     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
     profileFormValidator.reset();
-    const { name, about } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
 
+    const { name, about } = userProfile.getUserInfo(); //деструктурируем полученный объект, чтобы получить данные
     fieldName.value = name;
     fieldAbout.value = about;
     popupProfile.open();
-};
 
+};
+//выводит текст ошибки на консоль в случае получения от сервера ошибки (catch)
 function errorHandler(err) {
     console.log('Error: ', err)
 };
@@ -92,40 +113,17 @@ function saveProfile(data) {
         .then(() => userProfile.setUserInfo(data))
         .catch(errorHandler)
         .finally(() => popupProfile.close())
-};
 
+};
 function  handleOpenPopup({image, title}) {
     popupPhoto.open(image, title);
-};
 
+};
 function handleOpenPopupAdd() {
     adderFormValidator.reset();
     popupAdd.open();
 }
 
-
-const  api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
-    headers: {
-        authorization: '25211fd8-3e01-4ad9-a1d8-b38f3a1a11d7',
-        'Content-Type': 'application/json'
-    }
-});
-const popupPhoto = new PopupWithImage('.popup_type_photo');
-
-// в параметр data прилетает объект из PopupWithForm
-const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
-    api.postNewCard(data)
-        .then(res => {
-            addCard(res, userId)
-        })
-        .catch(errorHandler)
-        .finally(() => popupAdd.close())
-});
-
-
-
-const popupProfile = new PopupWithForm('.popup_type_profile', (data) => saveProfile(data));
 
 profileFormValidator.enableValidation();
 adderFormValidator.enableValidation();
@@ -133,6 +131,7 @@ adderFormValidator.enableValidation();
 popupPhoto.setEventListeners();
 popupAdd.setEventListeners();
 popupProfile.setEventListeners();
+popupConfirm.setEventListeners();
 
 buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
 buttonEdit.addEventListener('click', () => editProfile());
@@ -142,8 +141,6 @@ buttonEdit.addEventListener('click', () => editProfile());
 
 //работает форма с аватаркой
 const profileAvatar = document.querySelector('.profile-wrapper-avatar');
-const profileAvatarField = document.querySelector('.profile__avatar');
-const fieldAvatarLink = document.querySelector('#avatar');
 const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar(data));
 
 const avatarFormNew  = document
@@ -169,32 +166,6 @@ function saveAvatar(data) {
 popupAvatar.setEventListeners();
 profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
 
-//работает всплывает попап удаления
-// const buttonRemove = document.querySelector('.card__remove');
-// const popupConfirm = new PopupWithConfirm('.popup_type_confirm', (data) => data);
-//
-// function handleOpenPopupConfirm() {
-//     popupConfirm.open();
-//}
-//
-// function changeTextConfirm() {
-//     buttonRemove.textContent = 'Сохранение...';
-// }
-
-// popupConfirm.setEventListeners();
-// buttonRemove.addEventListener('click', () => handleOpenPopupConfirm());
-
-//берем данные с сервера и заталкиваем их в разметку через экземпляр класса UserInfo
-// api.getUserInfo() //возвращает ответ ввиде Response, далее даем инструкцию ввиде then, в случае удачи
-//     .then(function (userInfo){
-//     userProfile.setUserInfo(userInfo);
-//     userProfile.setAvatarUrl(userInfo);
-// });
-//
-//
-//
-// api.getInitialCards()
-//     .then(cards => cards.forEach((card) => addCard(card)));
 
 const sectionCard = new Section(
     {
@@ -204,9 +175,6 @@ const sectionCard = new Section(
     '.cards'
 );
 
-console.log(api.getInitialCards());
-api.getInitialCards() .then(arr => console.log(arr[0]._id));
-console.log(api.getUserInfo());
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([cards, userInfo]) => {

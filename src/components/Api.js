@@ -1,5 +1,4 @@
-// TODO: Для работы с API создайте класс Api. Все запросы должны быть методами этого класса:
-
+// Для работы с API класс Api.
 export default class Api {
     constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;

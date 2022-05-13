@@ -2,7 +2,6 @@
 
 - Принимает в конструктор объект с селекторами двух элементов:
     элемента имени пользователя и элемента информации о себе.*/
-
 export default class UserInfo {
    constructor({name, about, avatar}) {
        this._name = document.querySelector(name);
@@ -10,8 +9,8 @@ export default class UserInfo {
        this._avatar = document.querySelector(avatar);
    };
 
-        //возвращает объект с данными пользователя.
-        //Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии
+    //возвращает объект с данными пользователя.
+    //Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии
    getUserInfo () {
        return {
             name: this._name.textContent,

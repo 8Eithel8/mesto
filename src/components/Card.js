@@ -1,14 +1,3 @@
-//TODO Но прежде чем браться за работу с API, исправьте элемент карточки.
-// Сделайте так, чтобы иконка удаления была только на созданных вами карточках, так как удалять чужие карточки нельзя.
-// После того, как сделаете это, реализуйте функциональность удаления карточки.
-// Карточка должна удаляться, если в попапе удаления карточки пользователь нажал «Да».
-// Чтобы удалить карточку, отправьте DELETE-запрос:
-// Вместо `cardId` в URL нужно подставить параметр `_id` карточки, которую нужно удалить.
-// `_id` каждой карточки есть в её JSON:
-//
-//добавить 2 параметра в конструктор,  на клик по лайку и по корзинке
-
-
 export default class Card {
     constructor(data, userId, cardSelector, handleCardClick, handleCardRemove, handleCardLike) {
        this.title = data.name;
@@ -45,7 +34,7 @@ export default class Card {
         if (this._ownerId !== this._userId) {
             this._remove.style.display = "none";
         }
-        this._updateLike();
+        this._updateLikes();
         this._setEventListeners();
 
         // Добавляем данные
@@ -58,38 +47,32 @@ export default class Card {
         return this._element;
     };
 
-  // скрытые слушатели
-    //TODO изменить под новые задачи
-  _toogleLike() {
-    this._like.classList.toggle('added');
-  };
-
+  // удаление карточки
   removeCard() {
     this._element.remove();
   };
 
+  //ищем фотки  пролайканные пользователем
   isLiked () {
       return this.likes.find(user => user._id === this._userId);
   }
 
-
-
-  _updateLike () {
+  //перечистывам лайки
+  _updateLikes () {
       if (this.isLiked()) {
-          this._like.classList.add('added');;
+          this._like.classList.add('added');
       } else {
           this._like.classList.remove('added');
       }
       this._likeCounter.textContent = this.likes.length;
   }
 
+  //фиксируем лайки после пересчета
   setlikes (likes) {
       this.likes = likes;
-      console.log(likes);
-      this._updateLike();
+      this._updateLikes();
   }
 
-  //TODO заменить remove и handlercard click на те, что будут в конструкторе
   _setEventListeners() {
     this._like.addEventListener('click', () => this._handleCardLike());
     this._remove.addEventListener('click', () => this._handleCardRemove(this.id));
