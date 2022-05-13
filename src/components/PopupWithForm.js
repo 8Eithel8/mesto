@@ -11,13 +11,14 @@ export default class PopupWithForm extends Popup {
         this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
     };
 
-//метод собирает данные всех полей формы
+    //метод собирает данные всех полей формы
     _getInputValues () {
         const values = {};
         this._inputList.forEach(input => values[input.name] = input.value);
         return values;
     };
 
+    //метод переключает текст на кнопке при загрузке отправке данных на сервер
     _toogleSubmitText (isloading) {
         if (isloading) {
             this._buttonSubmit.textContent = 'Сохранение...';
@@ -26,8 +27,8 @@ export default class PopupWithForm extends Popup {
         }
     }
 
-//Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
-// добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
+    //Перезаписывает родительский метод `_setEventListeners`. Метод `_setEventListeners` класса `PopupWithForm`
+    // добавляет обработчик клика иконке закрытия и добавлять обработчик сабмита формы.
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
@@ -37,7 +38,7 @@ export default class PopupWithForm extends Popup {
         });
     };
 
-//Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
+    //Перезаписывает родительский метод `close`, так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
         super.close();
         this._form.reset();

@@ -13,10 +13,10 @@ const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 const fieldName = document.querySelector('#name');
 const fieldAbout = document.querySelector('#about');
+const profileAvatar = document.querySelector('.profile-wrapper-avatar');
+const cardTemplate = '#card-template';
 
 let userId;
-
-const cardTemplate = '#card-template';
 
 const profileForm = document
     .querySelector('.popup_type_profile')
@@ -24,11 +24,14 @@ const profileForm = document
 const cardFormNew  = document
     .querySelector('.popup_type_adder')
     .querySelector('.popup__form');
+const avatarFormNew  = document
+    .querySelector('.popup_type_editAvatar')
+    .querySelector('.popup__form');
 
 // создаем экземпляры классов
 const profileFormValidator = new FormValidator(settingsValidation, profileForm);
-const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
+const adderFormValidator = new FormValidator(settingsValidation, cardFormNew);
 
 const userProfile = new UserInfo({
     name: '.profile__title',
@@ -50,6 +53,18 @@ const  api = new Api({
     }
 });
 const popupPhoto = new PopupWithImage('.popup_type_photo');
+
+const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar(data));
+
+const avatarFormValidator = new FormValidator(settingsValidation, avatarFormNew);
+
+const sectionCard = new Section(
+    {
+        items: [],
+        renderer: addCard
+    },
+    '.cards'
+);
 
 // в параметр data прилетает объект из PopupWithForm
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
@@ -82,16 +97,15 @@ function createCard(data, userId) {
                     .then((res) => card.setlikes(res.likes))
                     .catch(errorHandler);
             }
-
         }
     );
     return card.generateCard();
-
 }
+
 function addCard(data, userId) {
     sectionCard.addItem(createCard(data, userId));
-
 };
+
 function editProfile() {
     //объект userInfo, созданный из класса,
     // вызываем метод для получения значений данных о пользователе из разметки при открытии попапа
@@ -113,41 +127,7 @@ function saveProfile(data) {
         .then(() => userProfile.setUserInfo(data))
         .catch(errorHandler)
         .finally(() => popupProfile.close())
-
 };
-function  handleOpenPopup({image, title}) {
-    popupPhoto.open(image, title);
-
-};
-function handleOpenPopupAdd() {
-    adderFormValidator.reset();
-    popupAdd.open();
-}
-
-
-profileFormValidator.enableValidation();
-adderFormValidator.enableValidation();
-
-popupPhoto.setEventListeners();
-popupAdd.setEventListeners();
-popupProfile.setEventListeners();
-popupConfirm.setEventListeners();
-
-buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
-buttonEdit.addEventListener('click', () => editProfile());
-
-
-//работает форма с аватаркой
-const profileAvatar = document.querySelector('.profile-wrapper-avatar');
-const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAvatar(data));
-
-const avatarFormNew  = document
-    .querySelector('.popup_type_editAvatar')
-    .querySelector('.popup__form');
-
-const avatarFormValidator = new FormValidator(settingsValidation, avatarFormNew);
-avatarFormValidator.enableValidation();
-
 
 function handleOpenPopupAvatar() {
     avatarFormValidator.reset();
@@ -161,18 +141,28 @@ function saveAvatar(data) {
         .finally(() => popupAvatar.close())
 }
 
+function  handleOpenPopup({image, title}) {
+    popupPhoto.open(image, title);
+
+};
+function handleOpenPopupAdd() {
+    adderFormValidator.reset();
+    popupAdd.open();
+}
+
+profileFormValidator.enableValidation();
+adderFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+
+popupPhoto.setEventListeners();
+popupAdd.setEventListeners();
+popupProfile.setEventListeners();
 popupAvatar.setEventListeners();
+popupConfirm.setEventListeners();
+
+buttonAdd.addEventListener('click', () => handleOpenPopupAdd());
+buttonEdit.addEventListener('click', () => editProfile());
 profileAvatar.addEventListener('click', () => handleOpenPopupAvatar());
-
-
-const sectionCard = new Section(
-    {
-        items: [],
-        renderer: addCard
-    },
-    '.cards'
-);
-
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([cards, userInfo]) => {

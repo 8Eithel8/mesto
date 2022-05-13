@@ -11,6 +11,7 @@ export default class Card {
        this._handleCardRemove = handleCardRemove;
        this._handleCardLike = handleCardLike;
     };
+
     _getTemplate() {
     // получаем разметку из HTML, клонируем элемент
     // и возвращаем DOM-элемент карточки
@@ -20,8 +21,6 @@ export default class Card {
           .querySelector('.card')
           .cloneNode(true);
     };
-
-
 
     generateCard() {
       // сохраняем разметку в приватное поле _element

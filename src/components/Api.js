@@ -68,6 +68,7 @@ export default class Api {
         })
             .then(this._checkRes)
     }
+
     //удалаяем фото
     removeCard(id) {
         return fetch(`${this._baseUrl}/cards/${id}`, {
@@ -76,6 +77,7 @@ export default class Api {
         })
             .then(this._checkRes)
     }
+
     //ставим лайк
     addLike(id) {
         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
@@ -84,6 +86,7 @@ export default class Api {
         })
             .then(this._checkRes)
     }
+
     //убираем лайк
     removeLike(id) {
         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
