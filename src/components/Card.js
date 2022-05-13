@@ -37,7 +37,9 @@ export default class Card {
       // сохраняем разметку в приватное поле _element
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector('.card__image');
+        this._title = this._element.querySelector('.card__title');
         this._like = this._element.querySelector('.card__like');
+        this._likeCounter = this._element.querySelector('.card__like-counter');
         this._remove = this._element.querySelector('.card__remove');
         if (this._ownerId !== this._userId) {
             this._remove.style.display = "none";
@@ -48,7 +50,8 @@ export default class Card {
         // Добавляем данные
         this._cardImage.src = this.image;
         this._cardImage.alt = this.title;
-        this._element.querySelector('.card__title').textContent = this.title;
+        this._title.textContent = this.title;
+        this._likeCounter.textContent = this._likes.length;
 
         // возвращаем элемент во внешнюю область
         return this._element;
