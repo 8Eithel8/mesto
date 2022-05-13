@@ -51,7 +51,19 @@ function createCard(data, userId) {
         userId,
         cardTemplate,
         () => handleOpenPopup(card),
-        () => popupConfirm.open(card)
+        () => popupConfirm.open(card),
+        () => {
+            if (card.isLiked()) {
+                api.removeLike(card.id)
+                    .then((res) => card.setlikes(res.likes))
+                    .catch(errorHandler);
+            } else {
+                api.addLike(card.id)
+                    .then((res) => card.setlikes(res.likes))
+                    .catch(errorHandler);
+            }
+
+        }
     );
     return card.generateCard();
 }

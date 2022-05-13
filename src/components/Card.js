@@ -45,7 +45,7 @@ export default class Card {
         if (this._ownerId !== this._userId) {
             this._remove.style.display = "none";
         }
-        this.updateLike();
+        this._updateLike();
         this._setEventListeners();
 
         // Добавляем данные
@@ -69,25 +69,24 @@ export default class Card {
   };
 
   isLiked () {
-      this.likes.find(user => user._id === this._userId)
+      return this.likes.find(user => user._id === this._userId);
   }
 
-  _addLike() {
-      this._like.classList.add('added');
-  }
 
-  _removeLike() {
-        this._like.classList.remove('added');
-  }
 
-  updateLike () {
+  _updateLike () {
       if (this.isLiked()) {
-          this._addLike();
+          this._like.classList.add('added');;
       } else {
-          this._removeLike();
+          this._like.classList.remove('added');
       }
-
       this._likeCounter.textContent = this.likes.length;
+  }
+
+  setlikes (likes) {
+      this.likes = likes;
+      console.log(likes);
+      this._updateLike();
   }
 
   //TODO заменить remove и handlercard click на те, что будут в конструкторе
