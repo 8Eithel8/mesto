@@ -49,6 +49,7 @@ export default class Card {
   // удаление карточки
   removeCard() {
     this._element.remove();
+    this._element = null;
   };
 
   //ищем фотки  пролайканные пользователем

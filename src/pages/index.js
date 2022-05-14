@@ -21,10 +21,10 @@ let userId;
 const profileForm = document
     .querySelector('.popup_type_profile')
     .querySelector('.popup__form');
-const cardFormNew  = document
+const cardFormNew = document
     .querySelector('.popup_type_adder')
     .querySelector('.popup__form');
-const avatarFormNew  = document
+const avatarFormNew = document
     .querySelector('.popup_type_editAvatar')
     .querySelector('.popup__form');
 
@@ -61,7 +61,7 @@ const popupAvatar = new PopupWithForm('.popup_type_editAvatar', (data) => saveAv
 
 const avatarFormValidator = new FormValidator(settingsValidation, avatarFormNew);
 
-const sectionCard = new Section('.cards');
+const sectionCard = new Section('.cards', (data) => addCard(data, userId));
 
 // в параметр data прилетает объект из PopupWithForm
 const popupAdd = new PopupWithForm('.popup_type_adder', (data) => {
@@ -170,5 +170,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
         userId = userInfo._id;
         userProfile.setUserInfo(userInfo);
         userProfile.setAvatarUrl(userInfo);
-        cards.forEach((card) => addCard(card, userInfo._id))
-    });
+        sectionCard.renderItems(cards);
+    })
+    .catch(errorHandler);
